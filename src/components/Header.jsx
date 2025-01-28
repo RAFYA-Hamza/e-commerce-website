@@ -10,17 +10,17 @@ export default function Header() {
     console.log("clicked");
   }
   return (
-    <header className="px-[10rem] py-[1rem] flex gap-[2rem]">
+    <header className="px-[10rem] py-[1rem] flex gap-[2rem] items-center">
       <div>
         <img src={logoImg} alt="My logo" />
       </div>
 
-      <div>
-        <input type="text" placeholder="Search" />
+      <div className="w-full max-w-[27rem]">
+        <input className="w-full" type="text" placeholder="Search" />
       </div>
 
       <nav>
-        <ul className="flex">
+        <ul className="flex gap-[3.25rem]">
           <li>
             <a href="">Home</a>
           </li>
