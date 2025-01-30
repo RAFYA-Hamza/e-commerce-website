@@ -14,6 +14,19 @@ import IconButton from "./UI/IconButton";
 
 // const navItem = ["Home", "About", "Contact Us", "Blog"];
 
+const subNavItems = [
+  { url: phoneImg, description: "Phones image", label: "Phones" },
+  { url: comupterImg, description: "Computers image", label: "Computers" },
+  {
+    url: swatchImg,
+    description: "Smart Watches image",
+    label: "Smart Watches",
+  },
+  { url: cameraImg, description: "Cameras image", label: "Cameras" },
+  { url: headphoneImg, description: "Headphones image", label: "Headphones" },
+  { url: gamingImg, description: "Gaming image", label: "Gaming" },
+];
+
 export default function Header() {
   function handleClick() {
     console.log("clicked");
@@ -63,29 +76,11 @@ export default function Header() {
         </div>
       </header>
       <nav className="w-full px-[10rem] py-[0.5rem] flex justify-between bg-[#2E2E2E] text-[#797979]">
-        <IconButton url={phoneImg} description="Phones image">
-          Phones
-        </IconButton>
-
-        <IconButton url={comupterImg} description="Computers image">
-          Computers
-        </IconButton>
-
-        <IconButton url={swatchImg} description="Smart Watches image">
-          Smart Watches
-        </IconButton>
-
-        <IconButton url={cameraImg} description="Cameras image">
-          Cameras
-        </IconButton>
-
-        <IconButton url={headphoneImg} description="Headphones image">
-          Headphones
-        </IconButton>
-
-        <IconButton url={gamingImg} description="Gaming image">
-          Gaming
-        </IconButton>
+        {subNavItems.map((item, index) => (
+          <IconButton key={index} url={item.url} description={item.description}>
+            {item.label}
+          </IconButton>
+        ))}
       </nav>
     </>
   );
