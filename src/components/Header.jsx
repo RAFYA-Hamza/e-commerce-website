@@ -3,6 +3,7 @@ import cartImg from "../assets/cart.svg";
 import favoriteImg from "../assets/favorite.svg";
 import profileImg from "../assets/profile.svg";
 import searchImg from "../assets/search.svg";
+
 import phoneImg from "../assets/phone.svg";
 import comupterImg from "../assets/computer.svg";
 import swatchImg from "../assets/swatch.svg";
