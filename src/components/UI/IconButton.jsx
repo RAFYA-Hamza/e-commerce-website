@@ -1,4 +1,4 @@
-export default function IconButton({ children, url, descritpion }) {
+export default function IconButton({ children, url, description }) {
   const cssClassButton = children
     ? "cursor-pointer bg-transparent flex items-center gap-[0.5rem] hover:bg-[#F6F6F6] p-[0.5rem] rounded-[0.25rem]"
     : "cursor-pointer bg-transparent";
@@ -8,7 +8,7 @@ export default function IconButton({ children, url, descritpion }) {
 
   return (
     <button className={cssClassButton}>
-      <img className={cssClassImg} src={url} alt={descritpion} />
+      <img className={cssClassImg} src={url} alt={description} />
       {children}
     </button>
   );

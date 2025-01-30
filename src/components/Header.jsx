@@ -55,35 +55,35 @@ export default function Header() {
         </ul>
 
         <div className="flex gap-[1rem]">
-          <IconButton url={favoriteImg} descritpion="Favorite image" />
+          <IconButton url={favoriteImg} description="Favorite image" />
 
-          <IconButton url={cartImg} descritpion="Cart image" />
+          <IconButton url={cartImg} description="Cart image" />
 
-          <IconButton url={profileImg} descritpion="Profile image" />
+          <IconButton url={profileImg} description="Profile image" />
         </div>
       </header>
       <nav className="w-full px-[10rem] py-[0.5rem] flex justify-between bg-[#2E2E2E] text-[#797979]">
-        <IconButton url={phoneImg} descritpion="Phones image">
+        <IconButton url={phoneImg} description="Phones image">
           Phones
         </IconButton>
 
-        <IconButton url={comupterImg} descritpion="Computers image">
+        <IconButton url={comupterImg} description="Computers image">
           Computers
         </IconButton>
 
-        <IconButton url={swatchImg} descritpion="Smart Watches image">
+        <IconButton url={swatchImg} description="Smart Watches image">
           Smart Watches
         </IconButton>
 
-        <IconButton url={cameraImg} descritpion="Cameras image">
+        <IconButton url={cameraImg} description="Cameras image">
           Cameras
         </IconButton>
 
-        <IconButton url={headphoneImg} descritpion="Headphones image">
+        <IconButton url={headphoneImg} description="Headphones image">
           Headphones
         </IconButton>
 
-        <IconButton url={gamingImg} descritpion="Gaming image">
+        <IconButton url={gamingImg} description="Gaming image">
           Gaming
         </IconButton>
       </nav>
