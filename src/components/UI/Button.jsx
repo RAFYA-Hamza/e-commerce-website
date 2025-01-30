@@ -1,10 +1,15 @@
 export default function Button({ children, isIcon, type }) {
-  const cssClass =
-    type === "blackStroke"
-      ? "border-black text-black"
-      : "border-white text-white";
+  var cssClass;
 
-  const classButton = `py-[1rem] px-[4rem] flex rounded-[0.5rem] border-2 border-solid ${cssClass}`;
+  if (type === "blackStroke") {
+    cssClass = "border-2 border-solid border-black text-black";
+  } else if (type === "whiteStroke") {
+    cssClass = "border-2 border-solid border-white text-white";
+  } else {
+    cssClass = "bg-black text-white";
+  }
+
+  const classButton = `py-[1rem] px-[4rem] flex gap-[1rem] rounded-[0.5rem] cursor-pointer ${cssClass}`;
 
   return (
     <button className={classButton}>
