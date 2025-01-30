@@ -1,6 +1,8 @@
 import Button from "./UI/Button";
 import TextButton from "./UI/TextButton";
 
+import product1 from "../assets/product1.png";
+
 export default function Products() {
   return (
     <section className="py-[3.5rem] px-[10rem] flex flex-col gap-[2rem]">
@@ -10,11 +12,11 @@ export default function Products() {
         <TextButton label="Featured Products" />
       </div>
       <ul className="grid grid-cols-4 grid-flow-row gap-[1rem]">
-        <li>
-          <div>
+        <li className="flex flex-col items-center gap-[1rem] text-[#909090]">
+          <div className="self-end">
             <svg
-              width="64px"
-              height="64px"
+              width="32px"
+              height="32px"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -35,11 +37,15 @@ export default function Products() {
               </g>
             </svg>
           </div>
-          <div>
-            <img src="" alt="" />
-          </div>
-          <div>
-            <div>
+
+          <img
+            className="object-cover"
+            src={product1}
+            alt="Iphone 14 pro max"
+          />
+
+          <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center">
               <p>Apple iPhone 14 Pro Max 128GB Deep Purple (MQ9T3RX/A)</p>
               <p>$1399</p>
             </div>
