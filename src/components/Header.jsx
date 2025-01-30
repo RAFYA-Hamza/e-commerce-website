@@ -4,6 +4,8 @@ import favoriteImg from "../assets/favorite.svg";
 import profileImg from "../assets/profile.svg";
 import searchImg from "../assets/search.svg";
 
+import IconButton from "./UI/IconButton";
+
 // const navItem = ["Home", "About", "Contact Us", "Blog"];
 
 export default function Header() {
@@ -48,29 +50,11 @@ export default function Header() {
       </nav>
 
       <div className="flex gap-[1rem]">
-        <button className="cursor-pointer bg-transparent">
-          <img
-            className="hover:bg-[#F6F6F6] p-[0.5rem] rounded-[0.25rem]"
-            src={favoriteImg}
-            alt="Favorite image"
-          />
-        </button>
+        <IconButton url={favoriteImg} descritpion="Favorite image" />
 
-        <button className="cursor-pointer bg-transparent">
-          <img
-            className="hover:bg-[#F6F6F6] p-[0.5rem] rounded-[0.25rem]"
-            src={cartImg}
-            alt="Cart image"
-          />
-        </button>
+        <IconButton url={cartImg} descritpion="Cart image" />
 
-        <button className="cursor-pointer bg-transparent">
-          <img
-            className="hover:bg-[#F6F6F6] p-[0.5rem] rounded-[0.25rem]"
-            src={profileImg}
-            alt="Profile image"
-          />
-        </button>
+        <IconButton url={profileImg} descritpion="Profile image" />
       </div>
     </header>
   );
