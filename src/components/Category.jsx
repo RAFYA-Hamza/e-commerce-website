@@ -1,6 +1,3 @@
-import rightarrowImg from "../assets/right-arrow.svg";
-import leftarrowImg from "../assets/left-arrow.svg";
-
 import phoneImg from "../assets/phone.svg";
 import comupterImg from "../assets/computer.svg";
 import swatchImg from "../assets/swatch.svg";
@@ -30,8 +27,61 @@ export default function Category() {
       <div className="flex justify-between items-center">
         <p>Browse By Category</p>
         <div>
-          <IconButton url={leftarrowImg} />
-          <IconButton url={rightarrowImg} />
+          <IconButton>
+            <svg
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+
+              <g
+                id="SVGRepo_tracerCarrier"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M15 7L10 12L15 17"
+                  stroke="#000000"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </g>
+            </svg>
+          </IconButton>
+
+          <IconButton>
+            <svg
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+
+              <g
+                id="SVGRepo_tracerCarrier"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M10 7L15 12L10 17"
+                  stroke="#000000"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </g>
+            </svg>
+          </IconButton>
         </div>
       </div>
 
