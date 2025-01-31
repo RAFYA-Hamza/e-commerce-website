@@ -33,9 +33,7 @@ export default function Header() {
   return (
     <>
       <header className="h-[5.5rem] px-[10rem] py-[1rem] flex justify-between items-center gap-2rem">
-        <div>
-          <img src={logoImg} alt="My logo" />
-        </div>
+        <img src={logoImg} alt="My logo" />
 
         <div className="w-full h-full max-w-[32rem] px-[1rem] py-[1rem] pl-[3rem] relative flex items-center bg-[#F5F5F5] rounded-[0.75rem]">
           <img
@@ -52,16 +50,24 @@ export default function Header() {
 
         <ul className="flex justify-between gap-[3.25rem] text-[#656565]">
           <li>
-            <a href="#">Home</a>
+            <a className="hover:text-black" href="#">
+              Home
+            </a>
           </li>
           <li>
-            <a href="#">About</a>
+            <a className="hover:text-black" href="#">
+              About
+            </a>
           </li>
           <li>
-            <a href="#">Contact Us</a>
+            <a className="hover:text-black" href="#">
+              Contact Us
+            </a>
           </li>
           <li>
-            <a href="#">Blog</a>
+            <a className="hover:text-black" href="#">
+              Blog
+            </a>
           </li>
         </ul>
 
