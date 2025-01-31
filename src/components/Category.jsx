@@ -25,7 +25,7 @@ export default function Category() {
   return (
     <section className="py-[5rem] px-[10rem] bg-[#FAFAFA] flex flex-col gap-[2rem]">
       <div className="flex justify-between items-center">
-        <p>Browse By Category</p>
+        <p className="text-[1.5rem] font-semibold">Browse By Category</p>
         <div>
           <IconButton>
             <svg

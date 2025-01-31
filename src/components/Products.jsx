@@ -1,10 +1,6 @@
-import Button from "./UI/Button";
 import TextButton from "./UI/TextButton";
-
 import product1 from "../assets/product1.png";
-import IconButton from "./UI/IconButton";
-
-import FavoriteIcone from "./UI/FavoriteIcon";
+import ProductItem from "./UI/ProductItem";
 
 const dummyProducts = [
   {
@@ -71,73 +67,38 @@ const dummyProducts = [
 
 export default function Products() {
   return (
-    <section className="py-[3.5rem] px-[10rem] flex flex-col gap-[2rem]">
-      <div className="flex gap-[0.5rem]">
-        <TextButton isActive={true} label="New Arrival" />
-        <TextButton label="Bestseller" />
-        <TextButton label="Featured Products" />
-      </div>
-      <ul className="grid grid-cols-4 grid-flow-row gap-[1rem]">
-        {dummyProducts.map((product) => (
-          <li
-            key={product.id}
-            className="flex flex-col items-center gap-[1rem] overflow-hidden py-[1.5rem] px-[1rem] rounded-[0.5rem] bg-[#F6F6F6]"
-          >
-            <div className="self-end">
-              <IconButton>
-                <FavoriteIcone />
-              </IconButton>
-            </div>
-
-            <img
-              className="w-full max-w-full aspect-square object-cover"
-              src={product1}
-              alt="Iphone 14 pro max"
+    <>
+      <section className="py-[3.5rem] px-[10rem] flex flex-col gap-[2rem]">
+        <div className="flex gap-[0.5rem]">
+          <TextButton isActive={true} label="New Arrival" />
+          <TextButton label="Bestseller" />
+          <TextButton label="Featured Products" />
+        </div>
+        <ul className="grid grid-cols-4 grid-flow-row gap-[1rem]">
+          {dummyProducts.map((product) => (
+            <ProductItem
+              key={product.id}
+              name={product.name}
+              price={product.price}
+              urlImage={product1}
             />
-
-            <div className="flex flex-col items-center gap-[1.5rem]">
-              <div className="flex flex-col items-center gap-[1rem]">
-                <p className="min-h-[3rem] text-center">{product.name}</p>
-                <p className="text-[1.5rem] font-semibold leading-none">
-                  {`$${product.price}`}
-                </p>
-              </div>
-              <Button type="Fill">Shop Now</Button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </section>
+          ))}
+        </ul>
+      </section>
+      <section className="py-[5rem] px-[10rem] flex flex-col gap-[2rem] bg-[#F6F6F6]">
+        <h1 className="text-[1.5rem] font-semibold">Discounts up to -50%</h1>
+        <ul className="grid grid-cols-4 grid-flow-row gap-[1rem]">
+          {dummyProducts.slice(1, 3).map((product) => (
+            <ProductItem
+              key={product.id}
+              name={product.name}
+              price={product.price}
+              urlImage={product1}
+              isWhite={true}
+            />
+          ))}
+        </ul>
+      </section>
+    </>
   );
 }
-
-/* <ul className="grid grid-cols-4 grid-flow-row gap-[1rem]">
-        {dummyProducts.map((product) => (
-          <li
-            key={product.id}
-            className="flex flex-col items-center justify-between gap-[1rem] overflow-hidden py-[1.5rem] px-[1rem] rounded-[0.5rem] bg-[#F6F6F6]"
-          >
-            <div className="self-end">
-              <IconButton>
-                <FavoriteIcone />
-              </IconButton>
-            </div>
-
-            <img
-              className="h-[10rem] w-full object-contain"
-              src={product1}
-              alt="Iphone 14 pro max"
-            />
-
-            <div className="flex flex-col items-center gap-[1.5rem]">
-              <div className="flex flex-col items-center gap-[1rem]">
-                <p className="text-center">{product.name}</p>
-                <p className="text-[1.5rem] font-semibold leading-none">
-                  {`$${product.price}`}
-                </p>
-              </div>
-              <Button type="Fill">Shop Now</Button>
-            </div>
-          </li>
-        ))}
-      </ul> */
