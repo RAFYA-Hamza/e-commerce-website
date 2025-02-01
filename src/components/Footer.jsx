@@ -38,7 +38,7 @@ const DATA = [
 
 export default function Footer() {
   return (
-    <section className="px-[10rem] py-[6.56rem] grid grid-cols-4 gap-3 bg-black">
+    <section className="w-full px-[10rem] py-[6.56rem] grid grid-cols-4 gap-3 bg-black">
       {DATA.map((data) => (
         <div key={data.name} className="flex flex-col gap-[1.5rem]">
           <h1 className="text-white uppercase font-semibold">{data.name}</h1>
