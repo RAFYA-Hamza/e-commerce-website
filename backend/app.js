@@ -16,15 +16,9 @@ app.use((req, res, next) => {
 });
 
 app.get("/products", async (req, res) => {
-  setTimeout(async () => {
-    const products = await fs.readFile(
-      "./data/available-products.json",
-      "utf8"
-    );
+  const products = await fs.readFile("./data/available-products.json", "utf8");
 
-    res.json(JSON.parse(products));
-    console.log("executed");
-  }, 3000);
+  res.json(JSON.parse(products));
 });
 
 app.listen(8080);

@@ -7,6 +7,7 @@ import gamingImg from "../assets/gaming.svg";
 
 import IconButton from "./UI/IconButton";
 import CategoryCard from "./UI/CategoryCard";
+import { useNavigate } from "react-router-dom";
 
 const categoryItems = [
   { url: phoneImg, description: "Phones image", label: "Phones" },
@@ -22,6 +23,8 @@ const categoryItems = [
 ];
 
 export default function Category() {
+  const navigate = useNavigate();
+
   return (
     <section className="py-[5rem] px-[10rem] bg-[#FAFAFA] flex flex-col gap-[2rem]">
       <div className="flex justify-between items-center">
@@ -91,6 +94,7 @@ export default function Category() {
             key={index}
             url={item.url}
             description={item.description}
+            onSelect={() => navigate("/products")}
           >
             {item.label}
           </CategoryCard>

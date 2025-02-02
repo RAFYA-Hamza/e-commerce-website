@@ -1,38 +1,25 @@
-import { Suspense } from "react";
-import { Await, useLoaderData } from "react-router-dom";
-
 import Banner from "../components/Banner";
 import Category from "../components/Category";
 import ProductsList from "../components/ProductsList";
+import useHttp from "../hooks/useHttp";
 
 export default function HomePage() {
-  const { events } = useLoaderData();
+  const { data, isLoading, error } = useHttp("http://localhost:8080/products");
+
+  if (isLoading) {
+    console.log("fetch");
+    return <p>Fetching Products...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <>
       <Banner />
       <Category />
-      <Suspense fallback={<p style={{ textAlign: "center" }}> Loading...</p>}>
-        <Await resolve={events}>
-          {(loadedProducts) => <ProductsList data={loadedProducts} />}
-        </Await>
-      </Suspense>
+      <ProductsList data={data} />
     </>
   );
-}
-
-export async function loadProducts() {
-  const response = await fetch("http://localhost:8080/products");
-
-  if (!response.ok) {
-    console.log("Couldn't fetch data...");
-    return;
-  }
-
-  // const resData = await response.json();
-  // console.log(resData);
-
-  return {
-    events: await response.json(),
-  };
 }
