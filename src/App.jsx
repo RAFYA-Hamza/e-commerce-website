@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Root";
 import HomePage from "./pages/Home";
 import ProductsPage from "./pages/Products";
+import { LoadProductsProvider } from "./store/LoadProductsContext";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <LoadProductsProvider>
+      <RouterProvider router={router} />
+    </LoadProductsProvider>
+  );
 }
 
 export default App;

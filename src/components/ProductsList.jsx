@@ -1,8 +1,20 @@
 import TextButton from "./UI/TextButton";
 import product1 from "../assets/product1.png";
 import ProductItem from "./UI/ProductItem";
+import { useContext } from "react";
+import { LoadProductsContext } from "../store/LoadProductsContext";
 
-export default function ProductsList({ data }) {
+export default function ProductsList() {
+  const { data, isLoading, error } = useContext(LoadProductsContext);
+
+  if (isLoading) {
+    return <p>Fetching data...</p>;
+  }
+
+  if (error) {
+    return <p>Fetching data failed!</p>;
+  }
+
   return (
     <>
       <section className="py-[3.5rem] px-[10rem] flex flex-col gap-[2rem]">

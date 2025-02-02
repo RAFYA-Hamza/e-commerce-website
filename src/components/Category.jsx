@@ -25,6 +25,14 @@ const categoryItems = [
 export default function Category() {
   const navigate = useNavigate();
 
+  function handleNavigation(label) {
+    const newLabel =
+      label.toLowerCase().replace(/\s+/g, "").trim().charAt(0).toUpperCase() +
+      label.toLowerCase().replace(/\s+/g, "").trim().slice(1);
+
+    navigate(`/products?category=${newLabel}`);
+  }
+
   return (
     <section className="py-[5rem] px-[10rem] bg-[#FAFAFA] flex flex-col gap-[2rem]">
       <div className="flex justify-between items-center">
@@ -94,7 +102,7 @@ export default function Category() {
             key={index}
             url={item.url}
             description={item.description}
-            onSelect={() => navigate("/products")}
+            onSelect={() => handleNavigation(item.label)}
           >
             {item.label}
           </CategoryCard>
