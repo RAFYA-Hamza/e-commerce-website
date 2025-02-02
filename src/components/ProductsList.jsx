@@ -65,7 +65,9 @@ const dummyProducts = [
   },
 ];
 
-export default function Products() {
+export default function ProductsList({ data }) {
+  console.log(data);
+
   return (
     <>
       <section className="py-[3.5rem] px-[10rem] flex flex-col gap-[2rem]">

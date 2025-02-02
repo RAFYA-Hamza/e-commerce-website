@@ -4,19 +4,30 @@ import RootLayout from "./pages/Root";
 import HomePage from "./pages/Home";
 import ProductsPage from "./pages/Products";
 
+import { loadProducts as productsLoader } from "./pages/Home";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     children: [
-      { path: "/", element: <HomePage /> },
-      { path: "/products", element: <ProductsPage /> },
+      { index: true, element: <HomePage /> },
+      {
+        path: "/products",
+        element: <ProductRootLayout />,
+        children: [
+          {
+            index: true,
+            element: <ProductsPage />,
+          },
+        ],
+      },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
