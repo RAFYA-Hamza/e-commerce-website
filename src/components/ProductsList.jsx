@@ -8,7 +8,7 @@ export default function ProductsList() {
   const { data, isLoading, error } = useContext(LoadProductsContext);
 
   if (isLoading) {
-    return <p>Fetching data from the server...</p>;
+    return <p>Fetching data...</p>;
   }
 
   if (error) {
