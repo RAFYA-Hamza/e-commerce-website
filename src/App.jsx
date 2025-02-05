@@ -1,27 +1,23 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 
-import RootLayout from "./pages/Root";
+import RootLayout from "./layout/RootLayout";
 import HomePage from "./pages/Home";
-import ProductsPage from "./pages/Products";
-import { LoadProductsProvider } from "./store/LoadProductsContext";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    children: [
-      { index: true, element: <HomePage /> },
-      { path: "/products", element: <ProductsPage /> },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<HomePage />} />
+    </Route>
+  )
+);
 
 function App() {
-  return (
-    <LoadProductsProvider>
-      <RouterProvider router={router} />
-    </LoadProductsProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
