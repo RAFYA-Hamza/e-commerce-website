@@ -1,8 +1,8 @@
-import { Await, useLoaderData } from "react-router-dom";
-import { Suspense } from "react";
+import { useLoaderData } from "react-router-dom";
 
 import product1 from "../assets/product1.png";
 import ProductItem from "./UI/ProductItem";
+import AsyncLoader from "./AsyncLoader";
 
 export default function ProductsList() {
   const { products } = useLoaderData();
@@ -13,23 +13,18 @@ export default function ProductsList() {
         <h1 className="text-[1.5rem] font-semibold">Discounts up to -50%</h1>
         <ul className="grid grid-cols-4 grid-flow-row gap-[1rem]">
           {
-            <Suspense fallback={<p>Loading...</p>}>
-              <Await
-                resolve={products}
-                errorElement={<p>Can't fetch new products</p>}
-              >
-                {(products) =>
-                  products?.map((product) => (
-                    <ProductItem
-                      key={product.id}
-                      name={product.name}
-                      price={product.price}
-                      urlImage={product1}
-                    />
-                  ))
-                }
-              </Await>
-            </Suspense>
+            <AsyncLoader promise={products}>
+              {(loadedProducts) =>
+                loadedProducts?.map((product) => (
+                  <ProductItem
+                    key={product.id}
+                    name={product.name}
+                    price={product.price}
+                    urlImage={product1}
+                  />
+                ))
+              }
+            </AsyncLoader>
           }
         </ul>
       </section>
