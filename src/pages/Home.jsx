@@ -1,6 +1,7 @@
 import Banner from "../components/Banner";
 import Category from "../components/Category";
-import ProductsList from "../components/ProductsList";
+import DiscountProducts from "../components/DiscountProducts";
+import HomeProducts from "../components/HomeProducts";
 
 import { sendHttpRequest } from "../hooks/useHttp";
 
@@ -9,7 +10,8 @@ export default function HomePage() {
     <>
       <Banner />
       <Category />
-      <ProductsList />
+      <HomeProducts />
+      <DiscountProducts />
     </>
   );
 }
