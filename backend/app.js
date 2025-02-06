@@ -21,6 +21,20 @@ app.get("/products", async (req, res) => {
   res.json(JSON.parse(products));
 });
 
+app.get("/", async (req, res) => {
+  const products = await fs.readFile("./data/available-products.json", "utf8");
+
+  setTimeout(() => {
+    const productsObj = JSON.parse(products);
+
+    const newProducts = productsObj.filter(
+      (product) => product.status !== "old"
+    );
+
+    res.json(newProducts);
+  }, 2000);
+});
+
 app.listen(8080);
 
 console.log("start listening...");
