@@ -4,32 +4,54 @@ import AsyncLoader from "./AsyncLoader";
 
 import TextButton from "./UI/TextButton";
 import ProductItem from "./UI/ProductItem";
-
-import product1 from "../assets/product1.png";
+import { useState } from "react";
 
 const HomeProducts = () => {
   const { products } = useLoaderData();
+  console.log(products);
+
+  const [productCategory, setProductCategory] = useState("new");
+
+  function handleProductCategory(type) {
+    setProductCategory(type);
+  }
 
   return (
     <section className="py-[3.5rem] px-[10rem] flex flex-col gap-[2rem]">
       <div className="flex gap-[0.5rem]">
-        <TextButton isActive={true} label="New Arrival" />
-        <TextButton label="Bestseller" />
-        <TextButton label="Featured Products" />
+        <TextButton
+          onSelect={() => handleProductCategory("new")}
+          isActive={productCategory === "new" ? true : false}
+          label="New Arrival"
+        />
+        <TextButton
+          onSelect={() => handleProductCategory("bestseller")}
+          isActive={productCategory === "bestseller" ? true : false}
+          label="Bestseller"
+        />
+        <TextButton
+          onSelect={() => handleProductCategory("featured")}
+          isActive={productCategory === "featured" ? true : false}
+          label="Featured Products"
+        />
       </div>
       <ul className="grid grid-cols-4 grid-flow-row gap-[1rem]">
         {
           <AsyncLoader promise={products}>
-            {(loadedProducts) =>
-              loadedProducts?.map((product) => (
+            {(loadedProducts) => {
+              const filteredProducts = loadedProducts.filter(
+                (product) => product.status === productCategory
+              );
+
+              return filteredProducts?.map((product) => (
                 <ProductItem
                   key={product.id}
                   name={product.name}
                   price={product.price}
-                  urlImage={product1}
+                  urlImage={`http://localhost:8080/${product.image}`}
                 />
-              ))
-            }
+              ));
+            }}
           </AsyncLoader>
         }
       </ul>

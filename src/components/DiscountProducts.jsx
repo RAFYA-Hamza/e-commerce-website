@@ -1,6 +1,5 @@
 import { useLoaderData } from "react-router-dom";
 
-import product1 from "../assets/product1.png";
 import ProductItem from "./UI/ProductItem";
 import AsyncLoader from "./AsyncLoader";
 
@@ -20,7 +19,7 @@ export default function ProductsList() {
                     key={product.id}
                     name={product.name}
                     price={product.price}
-                    urlImage={product1}
+                    urlImage={`http://localhost:8080/${product.image}`}
                   />
                 ))
               }
