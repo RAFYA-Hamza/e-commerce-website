@@ -13,16 +13,20 @@ export default function ProductsList() {
         <ul className="grid grid-cols-4 grid-flow-row gap-[1rem]">
           {
             <AsyncLoader promise={products}>
-              {(loadedProducts) =>
-                loadedProducts?.map((product) => (
+              {(loadedProducts) => {
+                const filteredProducts = loadedProducts.filter(
+                  (product) => product.status === "discount"
+                );
+
+                return filteredProducts?.map((product) => (
                   <ProductItem
                     key={product.id}
                     name={product.name}
                     price={product.price}
                     urlImage={`http://localhost:8080/${product.image}`}
                   />
-                ))
-              }
+                ));
+              }}
             </AsyncLoader>
           }
         </ul>
