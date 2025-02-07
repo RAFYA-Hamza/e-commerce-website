@@ -10,16 +10,42 @@ import CategoryCard from "./UI/CategoryCard";
 import { useNavigate } from "react-router-dom";
 
 const categoryItems = [
-  { url: phoneImg, description: "Phones image", label: "Phones" },
-  { url: comupterImg, description: "Computers image", label: "Computers" },
+  {
+    url: phoneImg,
+    description: "Phones image",
+    label: "Phones",
+    category: "Phones",
+  },
+  {
+    url: comupterImg,
+    description: "Computers image",
+    label: "Computers",
+    category: "Computers",
+  },
   {
     url: swatchImg,
     description: "Smart Watches image",
     label: "Smart Watches",
+    category: "Smartwatches",
   },
-  { url: cameraImg, description: "Cameras image", label: "Cameras" },
-  { url: headphoneImg, description: "Headphones image", label: "Headphones" },
-  { url: gamingImg, description: "Gaming image", label: "Gaming" },
+  {
+    url: cameraImg,
+    description: "Cameras image",
+    label: "Cameras",
+    category: "Phones",
+  },
+  {
+    url: headphoneImg,
+    description: "Headphones image",
+    label: "Headphones",
+    category: "Phones",
+  },
+  {
+    url: gamingImg,
+    description: "Gaming image",
+    label: "Gaming",
+    category: "Phones",
+  },
 ];
 
 export default function Category() {
@@ -102,7 +128,7 @@ export default function Category() {
             key={index}
             url={item.url}
             description={item.description}
-            onSelect={() => handleNavigation(item.label)}
+            toLink={`/products?category=${item.category}`}
           >
             {item.label}
           </CategoryCard>
