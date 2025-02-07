@@ -1,27 +1,38 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useSearchParams } from "react-router-dom";
 import { sendHttpRequest } from "../hooks/useHttp";
 import AsyncLoader from "../components/AsyncLoader";
 import ProductItem from "../components/UI/ProductItem";
 
 export default function ProductsPage() {
   const { products } = useLoaderData();
+  const [searchParams] = useSearchParams();
 
-  console.log(products);
+  const category = searchParams.get("category");
+
+  console.log(category);
   return (
     <>
       <h1>The product page</h1>
       <ul className="grid grid-cols-6 grid-flow-row gap-[1rem]">
         <AsyncLoader promise={products}>
-          {(loadedProducts) =>
-            loadedProducts.map((product) => (
+          {(loadedProducts) => {
+            const filteredProducts = loadedProducts?.filter(
+              (product) => product.category === category
+            );
+
+            if (filteredProducts.length <= 0) {
+              return <p>There is no product for this category</p>;
+            }
+
+            return filteredProducts?.map((product) => (
               <ProductItem
                 key={product.id}
                 name={product.name}
                 price={product.price}
                 urlImage={`http://localhost:8080/${product.image}`}
               />
-            ))
-          }
+            ));
+          }}
         </AsyncLoader>
       </ul>
     </>

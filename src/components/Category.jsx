@@ -14,7 +14,7 @@ const categoryItems = [
     url: phoneImg,
     description: "Phones image",
     label: "Phones",
-    category: "Phones",
+    category: "Smartphones",
   },
   {
     url: comupterImg,
@@ -32,19 +32,19 @@ const categoryItems = [
     url: cameraImg,
     description: "Cameras image",
     label: "Cameras",
-    category: "Phones",
+    category: "Cameras",
   },
   {
     url: headphoneImg,
     description: "Headphones image",
     label: "Headphones",
-    category: "Phones",
+    category: "Headphones",
   },
   {
     url: gamingImg,
     description: "Gaming image",
     label: "Gaming",
-    category: "Phones",
+    category: "Gaming",
   },
 ];
 
