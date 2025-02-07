@@ -8,7 +8,6 @@ import { useState } from "react";
 
 const HomeProducts = () => {
   const { products } = useLoaderData();
-  console.log(products);
 
   const [productCategory, setProductCategory] = useState("new");
 
