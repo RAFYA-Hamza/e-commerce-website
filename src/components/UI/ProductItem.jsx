@@ -2,7 +2,13 @@ import Button from "./Button";
 import IconButton from "./IconButton";
 import FavoriteIcone from "./FavoriteIcon";
 
-export default function ProductItem({ name, price, urlImage, isWhite }) {
+export default function ProductItem({
+  name,
+  price,
+  urlImage,
+  isWhite,
+  onSelect,
+}) {
   return (
     <li
       className={`flex flex-col items-center gap-[1rem] overflow-hidden py-[1.5rem] px-[1rem] rounded-[0.5rem] ${
@@ -28,7 +34,9 @@ export default function ProductItem({ name, price, urlImage, isWhite }) {
             {`$${price}`}
           </p>
         </div>
-        <Button type="Fill">Shop Now</Button>
+        <Button onSelect={onSelect} type="Fill">
+          Shop Now
+        </Button>
       </div>
     </li>
   );

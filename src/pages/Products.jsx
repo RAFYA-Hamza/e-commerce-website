@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { sendHttpRequest } from "../hooks/useHttp";
 import AsyncLoader from "../components/AsyncLoader";
 import ProductItem from "../components/UI/ProductItem";
@@ -6,6 +6,7 @@ import ProductItem from "../components/UI/ProductItem";
 export default function ProductsPage() {
   const { products } = useLoaderData();
   const { category } = useParams();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -26,6 +27,7 @@ export default function ProductsPage() {
                 name={product.name}
                 price={product.price}
                 urlImage={`http://localhost:8080/${product.image}`}
+                onSelect={() => navigate(`${product.id}`)}
               />
             ));
           }}

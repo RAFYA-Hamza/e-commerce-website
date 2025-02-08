@@ -23,10 +23,12 @@ app.get("/products", async (req, res) => {
 
 app.get("/products/:category/:id", async (req, res) => {
   const productId = parseInt(req.params.id);
+  const category = req.params.category;
+
   const products = await fs.readFile("./data/available-products.json", "utf8");
 
   const product = JSON.parse(products).find(
-    (product) => product.id === productId
+    (product) => product.id === productId && product.category === category
   );
 
   res.json(product);
