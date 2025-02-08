@@ -7,7 +7,6 @@ import gamingImg from "../assets/gaming.svg";
 
 import IconButton from "./UI/IconButton";
 import CategoryCard from "./UI/CategoryCard";
-import { useNavigate } from "react-router-dom";
 
 const categoryItems = [
   {

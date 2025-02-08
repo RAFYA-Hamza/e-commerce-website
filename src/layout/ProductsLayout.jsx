@@ -1,11 +1,14 @@
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useParams, useRouteLoaderData } from "react-router-dom";
+import AsyncLoader from "../components/AsyncLoader";
 
 const ProductsLayout = () => {
-  //   const urlParams = useParams();
+  const urlParams = useParams();
+
+  const { product } = useRouteLoaderData("product-detail");
 
   //   const pathObj = ["Catalog", "Brand"];
 
-  //   console.log(urlParams);
+  console.log(product);
 
   return (
     <>
@@ -13,6 +16,11 @@ const ProductsLayout = () => {
         <li>
           <Link to="/">Home</Link>
         </li>
+        <AsyncLoader promise={product}>
+          {(loadedProduct) => {
+            console.log(loadedProduct);
+          }}
+        </AsyncLoader>
 
         {/* {pathObj.map((path, index) => (
           <li key={index}>
