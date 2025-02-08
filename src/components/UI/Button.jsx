@@ -1,4 +1,4 @@
-export default function Button({ children, isIcon, type }) {
+export default function Button({ children, isIcon, type, onSelect }) {
   var cssClass;
 
   if (type === "blackStroke") {
@@ -12,7 +12,7 @@ export default function Button({ children, isIcon, type }) {
   const classButton = `py-[1rem] px-[4rem] flex gap-[1rem] rounded-[0.5rem] cursor-pointer ${cssClass}`;
 
   return (
-    <button className={classButton}>
+    <button onClick={onSelect} className={classButton}>
       {children}
       {isIcon && (
         <svg

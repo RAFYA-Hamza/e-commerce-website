@@ -8,16 +8,24 @@ import {
 import RootLayout from "./layout/RootLayout";
 import HomePage, { loader as newProductsLoader } from "./pages/Home";
 import ProductsPage, { loader as productsLoader } from "./pages/Products";
+import ProductsLayout from "./layout/ProductsLayout";
+import ProductDetails, {
+  loader as ProductDetailsLoader,
+} from "./pages/ProductDetails";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<HomePage />} loader={newProductsLoader} />
-      <Route
-        path="products"
-        element={<ProductsPage />}
-        loader={productsLoader}
-      />
+
+      <Route path="products/:category" element={<ProductsLayout />}>
+        <Route index element={<ProductsPage />} loader={productsLoader} />
+        <Route
+          path=":id"
+          element={<ProductDetails />}
+          loader={ProductDetailsLoader}
+        />
+      </Route>
     </Route>
   )
 );

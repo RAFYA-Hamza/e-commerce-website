@@ -21,6 +21,17 @@ app.get("/products", async (req, res) => {
   res.json(JSON.parse(products));
 });
 
+app.get("/products/:category/:id", async (req, res) => {
+  const productId = parseInt(req.params.id);
+  const products = await fs.readFile("./data/available-products.json", "utf8");
+
+  const product = JSON.parse(products).find(
+    (product) => product.id === productId
+  );
+
+  res.json(product);
+});
+
 app.get("/", async (req, res) => {
   const products = await fs.readFile("./data/available-products.json", "utf8");
 
