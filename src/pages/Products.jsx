@@ -29,7 +29,7 @@ export default function ProductsPage() {
                 urlImage={`http://localhost:8080/${product.image}`}
                 onSelect={() =>
                   navigate(
-                    `?id=${product.id}&category=${product.category}&brand=${product.Brand}`
+                    `?id=${product.id}&Category=${product.category}&Brand=${product.Brand}&name=${product.name}`
                   )
                 }
               />
