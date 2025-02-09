@@ -15,23 +15,39 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/products", async (req, res) => {
+app.get("/products/:category", async (req, res) => {
+  const category = req.params.category;
   const products = await fs.readFile("./data/products.json", "utf8");
 
-  res.json(JSON.parse(products));
+  const resProducts = JSON.parse(products).filter(
+    (product) => product.category === category
+  );
+
+  res.json(resProducts);
 });
 
 app.get("/products/:category/:id", async (req, res) => {
   const productId = parseInt(req.params.id);
   const category = req.params.category;
 
-  const products = await fs.readFile("./data/products.json", "utf8");
-
-  const product = JSON.parse(products).find(
-    (product) => product.id === productId && product.category === category
+  const productsDetails = await fs.readFile(
+    "./data/products-details.json",
+    "utf8"
   );
 
-  res.json(product);
+  const products = await fs.readFile("./data/products.json", "utf8");
+
+  const productDetails = JSON.parse(productsDetails).find(
+    (product) => product.id === productId
+  );
+
+  const product = JSON.parse(products).find(
+    (product) => product.id === productId
+  );
+
+  const resProduct = { id: productId, ...product, ...productDetails };
+
+  res.json(resProduct);
 });
 
 app.get("/", async (req, res) => {

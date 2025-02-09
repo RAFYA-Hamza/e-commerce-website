@@ -19,10 +19,15 @@ const router = createBrowserRouter(
       <Route index element={<HomePage />} loader={newProductsLoader} />
 
       <Route path="products/:category" element={<ProductsLayout />}>
-        <Route index element={<ProductsPage />} loader={productsLoader} />
+        <Route
+          index
+          id="products"
+          element={<ProductsPage />}
+          loader={productsLoader}
+        />
         <Route
           path=":id"
-          id="product-detail"
+          id="product-details"
           element={<ProductDetails />}
           loader={ProductDetailsLoader}
         />

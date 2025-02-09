@@ -27,7 +27,11 @@ export default function ProductsPage() {
                 name={product.name}
                 price={product.price}
                 urlImage={`http://localhost:8080/${product.image}`}
-                onSelect={() => navigate(`${product.id}`)}
+                onSelect={() =>
+                  navigate(
+                    `?id=${product.id}&category=${product.category}&brand=${product.Brand}`
+                  )
+                }
               />
             ));
           }}
@@ -37,14 +41,17 @@ export default function ProductsPage() {
   );
 }
 
-const loadProducts = async () => {
-  const resData = await sendHttpRequest("http://localhost:8080/products");
+const loadProducts = async ({ params }) => {
+  const { category } = params;
+  const resData = await sendHttpRequest(
+    "http://localhost:8080/products/" + category
+  );
 
   return resData;
 };
 
-export const loader = () => {
+export const loader = ({ params }) => {
   return {
-    products: loadProducts(),
+    products: loadProducts({ params }),
   };
 };

@@ -10,14 +10,16 @@ const ProductDetails = () => {
       <h1>Products details</h1>
       <ul className="grid grid-cols-6 grid-flow-row gap-[1rem]">
         <AsyncLoader promise={product}>
-          {(loadedProduct) => (
-            <ProductItem
-              key={loadedProduct.id}
-              name={loadedProduct.name}
-              price={loadedProduct.price}
-              urlImage={`http://localhost:8080/${loadedProduct.image}`}
-            />
-          )}
+          {(loadedProduct) => {
+            return (
+              <ProductItem
+                key={loadedProduct.id}
+                name={loadedProduct.name}
+                price={loadedProduct.price}
+                urlImage={`http://localhost:8080/${loadedProduct.image}`}
+              />
+            );
+          }}
         </AsyncLoader>
       </ul>
     </>
