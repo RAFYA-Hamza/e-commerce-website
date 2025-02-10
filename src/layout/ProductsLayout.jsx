@@ -6,7 +6,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 
-import BreadcrumbArrow from "../components/UI/BreadscrumbArrow";
+import BreadcrumbArrow from "../components/UI/BreadcrumbArrow";
 import React from "react";
 
 const ProductsLayout = () => {
@@ -47,45 +47,6 @@ const ProductsLayout = () => {
               )}
             </React.Fragment>
           ))}
-          {/* {queryEntries.map(([key, value], index) => {
-            return index === 0 ? (
-              <li key={index} className="flex gap-[1rem]">
-                <BreadsCrumbArrow />
-
-                <span>{key}</span>
-
-                <BreadsCrumbArrow />
-
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? "text-black medium" : ""
-                  }
-                  to={`/products/${value}`}
-                  end
-                >
-                  {value}
-                </NavLink>
-              </li>
-            ) : (
-              <li key={index} className="flex gap-[1rem]">
-                <BreadsCrumbArrow />
-
-                {index === 2 ? (
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive ? "text-black medium" : ""
-                    }
-                    to={`${pathUrl}`}
-                    end
-                  >
-                    {value}
-                  </NavLink>
-                ) : (
-                  <span>{value}</span>
-                )}
-              </li>
-            );
-          })} */}
         </ul>
       </nav>
 

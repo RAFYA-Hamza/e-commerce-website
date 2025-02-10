@@ -1,7 +1,7 @@
 import arrowImg from "../../assets/arrow.svg";
 
-const BreadscrumbArrow = () => {
+const BreadcrumbArrow = () => {
   return <img src={arrowImg} alt="Arrow image" />;
 };
 
-export default BreadscrumbArrow;
+export default BreadcrumbArrow;
