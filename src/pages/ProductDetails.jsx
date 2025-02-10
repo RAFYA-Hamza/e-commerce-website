@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams, useSearchParams } from "react-router-dom";
 import { sendHttpRequest } from "../hooks/useHttp";
 import AsyncLoader from "../components/AsyncLoader";
 import ProductItem from "../components/UI/ProductItem";
@@ -28,8 +28,10 @@ const ProductDetails = () => {
 
 export default ProductDetails;
 
-const loadProduct = async ({ params }) => {
-  const { id, category } = params;
+const loadProduct = async ({ request, params }) => {
+  const { category } = params;
+  const url = new URL(request.url);
+  const id = url.searchParams.get("id");
 
   const resData = await sendHttpRequest(
     `http://localhost:8080/products/${category}/${id}`
@@ -38,8 +40,8 @@ const loadProduct = async ({ params }) => {
   return resData;
 };
 
-export const loader = ({ params }) => {
+export const loader = ({ request, params }) => {
   return {
-    product: loadProduct({ params }),
+    product: loadProduct({ request, params }),
   };
 };

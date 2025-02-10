@@ -26,7 +26,7 @@ const router = createBrowserRouter(
           loader={productsLoader}
         />
         <Route
-          path=":id"
+          path="details"
           id="product-details"
           element={<ProductDetails />}
           loader={ProductDetailsLoader}
