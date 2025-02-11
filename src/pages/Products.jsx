@@ -8,6 +8,7 @@ import Dropdown from "../components/UI/Dropdown";
 
 import downArrowImg from "../assets/downArrow.svg";
 import upArrowImg from "../assets/upArrow.svg";
+import SearchField from "../components/UI/SearchField";
 
 export default function ProductsPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,23 +45,28 @@ export default function ProductsPage() {
         </Dropdown>
 
         <Dropdown title="Brand">
-          <div className="flex justify-between text-[#A7A7A7]">
-            <p>From</p>
-            <p>To</p>
-          </div>
-          <div className="w-ful flex justify-between">
-            <input
-              className="max-w-[6.75rem] py-[0.5rem] px-[0.5rem] border-[1px] border-[#9F9F9F] rounded-sm"
-              type="number"
-              name=""
-              id=""
-            />
-            <input
-              className="max-w-[6.75rem] py-[0.5rem] px-[0.5rem] border-[1px] border-[#9F9F9F] rounded-sm"
-              type="number"
-              name=""
-              id=""
-            />
+          <div className="w-ful flex flex-col">
+            <form action="">
+              <SearchField isMin={true} />
+
+              <div>
+                <input
+                  type="radio"
+                  name="smartphones"
+                  id="apple"
+                  value="Apple"
+                />
+                <label htmlFor="apple">Apple</label>
+              </div>
+              <div>
+                <input type="radio" name="smartphones" id="samsung" />
+                <label htmlFor="samsung">Samsung</label>
+              </div>
+              <div>
+                <input type="radio" name="smartphones" id="oppo" />
+                <label htmlFor="oppo">OPPO</label>
+              </div>
+            </form>
           </div>
         </Dropdown>
 
