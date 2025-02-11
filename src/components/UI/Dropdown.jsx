@@ -15,7 +15,7 @@ const Dropdown = ({ title, children }) => {
         onClick={handleClick}
         className="flex justify-between py-[0.75rem] border-b-1 border-[#B5B5B5] cursor-pointer"
       >
-        <p>{title}</p>
+        <p className="text-[1.125rem] font-semibold">{title}</p>
         <img src={isOpen ? upArrowImg : downArrowImg} alt="Down/Up Arrow" />
       </div>
 
