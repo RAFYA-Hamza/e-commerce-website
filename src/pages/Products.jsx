@@ -1,29 +1,33 @@
+import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { sendHttpRequest } from "../hooks/useHttp";
+
 import AsyncLoader from "../components/AsyncLoader";
 import ProductItem from "../components/UI/ProductItem";
+import Dropdown from "../components/UI/Dropdown";
 
 import downArrowImg from "../assets/downArrow.svg";
 import upArrowImg from "../assets/upArrow.svg";
 
 export default function ProductsPage() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const { products } = useLoaderData();
   const navigate = useNavigate();
+
+  function handleClick() {
+    setIsOpen(!isOpen);
+  }
 
   return (
     <section className="flex gap-[2rem] px-[10rem] py-[1.5rem]">
       <ul className="flex flex-col gap-[1.5rem] w-full max-w-[16rem]">
-        <div className="flex justify-between py-[0.75rem] border-b-1 border-[#B5B5B5]">
-          <p>Title</p>
-          <img src={downArrowImg} alt="Down Arrow image" />
-        </div>
-
-        <div className="flex flex-col gap-2">
+        <Dropdown title="Price">
           <div className="flex justify-between text-[#A7A7A7]">
             <p>From</p>
             <p>To</p>
           </div>
-          <div className="flex justify-between w-ful">
+          <div className="w-ful flex justify-between">
             <input
               className="max-w-[6.75rem] py-[0.5rem] px-[0.5rem] border-[1px] border-[#9F9F9F] rounded-sm"
               type="number"
@@ -37,7 +41,49 @@ export default function ProductsPage() {
               id=""
             />
           </div>
-        </div>
+        </Dropdown>
+
+        <Dropdown title="Brand">
+          <div className="flex justify-between text-[#A7A7A7]">
+            <p>From</p>
+            <p>To</p>
+          </div>
+          <div className="w-ful flex justify-between">
+            <input
+              className="max-w-[6.75rem] py-[0.5rem] px-[0.5rem] border-[1px] border-[#9F9F9F] rounded-sm"
+              type="number"
+              name=""
+              id=""
+            />
+            <input
+              className="max-w-[6.75rem] py-[0.5rem] px-[0.5rem] border-[1px] border-[#9F9F9F] rounded-sm"
+              type="number"
+              name=""
+              id=""
+            />
+          </div>
+        </Dropdown>
+
+        <Dropdown title="Built-in memory">
+          <div className="flex justify-between text-[#A7A7A7]">
+            <p>From</p>
+            <p>To</p>
+          </div>
+          <div className="w-ful flex justify-between">
+            <input
+              className="max-w-[6.75rem] py-[0.5rem] px-[0.5rem] border-[1px] border-[#9F9F9F] rounded-sm"
+              type="number"
+              name=""
+              id=""
+            />
+            <input
+              className="max-w-[6.75rem] py-[0.5rem] px-[0.5rem] border-[1px] border-[#9F9F9F] rounded-sm"
+              type="number"
+              name=""
+              id=""
+            />
+          </div>
+        </Dropdown>
       </ul>
 
       <ul className="w-full grid grid-cols-3 grid-flow-row gap-[1rem]">
