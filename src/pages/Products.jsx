@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { sendHttpRequest } from "../hooks/useHttp";
 
@@ -6,19 +5,57 @@ import AsyncLoader from "../components/AsyncLoader";
 import ProductItem from "../components/UI/ProductItem";
 import Dropdown from "../components/UI/Dropdown";
 
-import downArrowImg from "../assets/downArrow.svg";
-import upArrowImg from "../assets/upArrow.svg";
 import SearchField from "../components/UI/SearchField";
 import RadioButton from "../components/RadioButton";
 
 export default function ProductsPage() {
-  const [isOpen, setIsOpen] = useState(false);
-
   const { products } = useLoaderData();
   const navigate = useNavigate();
 
-  function handleClick() {
-    setIsOpen(!isOpen);
+  function sortItems(products) {
+    const newProducts = [];
+  }
+
+  function formatNumber(products) {
+    let newProducts = [...products];
+    let buffer = [];
+
+    // products.forEach((product, index) => {
+    //   for (let i = index + 1; i < products.length; i++) {
+    //     if (product.memory !== "N/A") {
+    //       const memory1 = product.memory.slice(0, -2);
+    //       const memory2 = products[i].memory.slice(0, -2);
+
+    //       if (memory1 < memory2) {
+    //         newProducts = product;
+    //       } else if (memory2 < memory1) {
+    //         newProducts = products[i];
+    //         product;
+    //       }
+    //     }
+    //   }
+    // });
+
+    console.log(newProducts);
+
+    for (let i = 0; i < newProducts.length - 1; i++) {
+      for (let j = i + 1; j < newProducts.length; j++) {
+        if (
+          newProducts[i].memory !== "N/A" &&
+          newProducts[j].memory !== "N/A"
+        ) {
+          const memory1 = newProducts[i].memory.slice(0, -2);
+          const memory2 = newProducts[j].memory.slice(0, -2);
+
+          if (parseInt(memory1) > parseInt(memory2)) {
+            [newProducts[i], newProducts[j]] = [newProducts[j], newProducts[i]];
+          }
+          console.log(newProducts);
+        }
+      }
+    }
+
+    return newProducts;
   }
 
   return (
@@ -63,7 +100,7 @@ export default function ProductsPage() {
 
                 <Dropdown title="Built-in memory">
                   <form className="flex flex-col gap-[0.5rem]" action="">
-                    {loadedProducts?.map((product) => (
+                    {formatNumber(loadedProducts)?.map((product) => (
                       <RadioButton key={product.id} label={product.memory} />
                     ))}
                   </form>
