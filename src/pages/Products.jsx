@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { sendHttpRequest } from "../hooks/useHttp";
 
 import AsyncLoader from "../components/AsyncLoader";
@@ -8,35 +8,26 @@ import Dropdown from "../components/UI/Dropdown";
 import SearchField from "../components/UI/SearchField";
 import RadioButton from "../components/RadioButton";
 
+const BUILT_IN_MEMEROY = {
+  Smartphones: ["64GB", "128GB", "256GB", "512GB", "1TB"],
+  Computers: ["256GB", "512GB", "1TB", "2TB"],
+  Smartwatches: ["4GB", "8GB", "16GB", "32GB"],
+  Cameras: ["N/A"],
+  Headphones: ["N/A"],
+  Gaming: ["64GB", "128GB", "256GB", "512GB", "1TB", "2TB"],
+};
+
 export default function ProductsPage() {
   const { products } = useLoaderData();
   const navigate = useNavigate();
 
-  function sortItems(products) {
-    const newProducts = [];
-  }
+  const { category } = useParams();
+  const memory = Object.values(BUILT_IN_MEMEROY[category]);
+
+  console.log(Object.values(BUILT_IN_MEMEROY[category]));
 
   function formatNumber(products) {
     let newProducts = [...products];
-    let buffer = [];
-
-    // products.forEach((product, index) => {
-    //   for (let i = index + 1; i < products.length; i++) {
-    //     if (product.memory !== "N/A") {
-    //       const memory1 = product.memory.slice(0, -2);
-    //       const memory2 = products[i].memory.slice(0, -2);
-
-    //       if (memory1 < memory2) {
-    //         newProducts = product;
-    //       } else if (memory2 < memory1) {
-    //         newProducts = products[i];
-    //         product;
-    //       }
-    //     }
-    //   }
-    // });
-
-    console.log(newProducts);
 
     for (let i = 0; i < newProducts.length - 1; i++) {
       for (let j = i + 1; j < newProducts.length; j++) {
@@ -50,7 +41,6 @@ export default function ProductsPage() {
           if (parseInt(memory1) > parseInt(memory2)) {
             [newProducts[i], newProducts[j]] = [newProducts[j], newProducts[i]];
           }
-          console.log(newProducts);
         }
       }
     }
@@ -100,9 +90,9 @@ export default function ProductsPage() {
 
                 <Dropdown title="Built-in memory">
                   <form className="flex flex-col gap-[0.5rem]" action="">
-                    {formatNumber(loadedProducts)?.map((product) => (
-                      <RadioButton key={product.id} label={product.memory} />
-                    ))}
+                    {memory?.map((element) => {
+                      return <RadioButton key={element} label={element} />;
+                    })}
                   </form>
                 </Dropdown>
               </ul>
