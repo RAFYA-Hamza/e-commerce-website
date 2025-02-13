@@ -24,29 +24,27 @@ export default function ProductsPage() {
   const { category } = useParams();
   const memory = Object.values(BUILT_IN_MEMEROY[category]);
 
-  console.log(Object.values(BUILT_IN_MEMEROY[category]));
+  // function formatNumber(products) {
+  //   let newProducts = [...products];
 
-  function formatNumber(products) {
-    let newProducts = [...products];
+  //   for (let i = 0; i < newProducts.length - 1; i++) {
+  //     for (let j = i + 1; j < newProducts.length; j++) {
+  //       if (
+  //         newProducts[i].memory !== "N/A" &&
+  //         newProducts[j].memory !== "N/A"
+  //       ) {
+  //         const memory1 = newProducts[i].memory.slice(0, -2);
+  //         const memory2 = newProducts[j].memory.slice(0, -2);
 
-    for (let i = 0; i < newProducts.length - 1; i++) {
-      for (let j = i + 1; j < newProducts.length; j++) {
-        if (
-          newProducts[i].memory !== "N/A" &&
-          newProducts[j].memory !== "N/A"
-        ) {
-          const memory1 = newProducts[i].memory.slice(0, -2);
-          const memory2 = newProducts[j].memory.slice(0, -2);
+  //         if (parseInt(memory1) > parseInt(memory2)) {
+  //           [newProducts[i], newProducts[j]] = [newProducts[j], newProducts[i]];
+  //         }
+  //       }
+  //     }
+  //   }
 
-          if (parseInt(memory1) > parseInt(memory2)) {
-            [newProducts[i], newProducts[j]] = [newProducts[j], newProducts[i]];
-          }
-        }
-      }
-    }
-
-    return newProducts;
-  }
+  //   return newProducts;
+  // }
 
   return (
     <section className="flex gap-[2rem] px-[10rem] py-[1.5rem]">
@@ -89,28 +87,47 @@ export default function ProductsPage() {
                 </Dropdown>
 
                 <Dropdown title="Built-in memory">
-                  <form className="flex flex-col gap-[0.5rem]" action="">
-                    {memory?.map((element) => {
-                      return <RadioButton key={element} label={element} />;
-                    })}
-                  </form>
+                  <div className="w-ful flex flex-col gap-[1rem]">
+                    <SearchField isMin={true} />
+
+                    <form className="flex flex-col gap-[0.5rem]" action="">
+                      {memory?.map((element) => {
+                        if (element === "N/A") {
+                          return <p key={element}>Not applicable</p>;
+                        }
+                        return <RadioButton key={element} label={element} />;
+                      })}
+                    </form>
+                  </div>
                 </Dropdown>
               </ul>
-              <ul className="w-full grid grid-cols-3 grid-flow-row gap-[1rem]">
-                {loadedProducts?.map((product) => (
-                  <ProductItem
-                    key={product.id}
-                    name={product.name}
-                    price={product.price}
-                    urlImage={`http://localhost:8080/${product.image}`}
-                    onSelect={() =>
-                      navigate(
-                        `details?id=${product.id}&Category=${product.category}&Brand=${product.Brand}&name=${product.name}`
-                      )
-                    }
-                  />
-                ))}
-              </ul>
+              <div className="flex flex-col">
+                <div className="flex justify-between items-center">
+                  <p>
+                    Selected Products: <span>85</span>
+                  </p>
+
+                  <Dropdown isDifferent={true} title="By rating">
+                    <p>hu</p>
+                  </Dropdown>
+                </div>
+
+                <ul className="w-full grid grid-cols-3 grid-flow-row gap-[1rem]">
+                  {loadedProducts?.map((product) => (
+                    <ProductItem
+                      key={product.id}
+                      name={product.name}
+                      price={product.price}
+                      urlImage={`http://localhost:8080/${product.image}`}
+                      onSelect={() =>
+                        navigate(
+                          `details?id=${product.id}&Category=${product.category}&Brand=${product.Brand}&name=${product.name}`
+                        )
+                      }
+                    />
+                  ))}
+                </ul>
+              </div>
             </>
           );
         }}
