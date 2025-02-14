@@ -7,6 +7,7 @@ import Dropdown from "../components/UI/Dropdown";
 
 import SearchField from "../components/UI/SearchField";
 import RadioButton from "../components/RadioButton";
+import { useState } from "react";
 
 const BUILT_IN_MEMEROY = {
   Smartphones: ["64GB", "128GB", "256GB", "512GB", "1TB"],
@@ -20,6 +21,8 @@ const BUILT_IN_MEMEROY = {
 export default function ProductsPage() {
   const { products } = useLoaderData();
   const navigate = useNavigate();
+
+  const [finalValue, setFinalValue] = useState(false);
 
   const { category } = useParams();
   const memory = Object.values(BUILT_IN_MEMEROY[category]);
@@ -46,10 +49,18 @@ export default function ProductsPage() {
   //   return newProducts;
   // }
 
+  function handleChange(value) {
+    setFinalValue(value);
+  }
+
+  console.log("final value", finalValue);
+
   return (
     <section className="flex gap-[2rem] px-[10rem] py-[1.5rem]">
       <AsyncLoader promise={products}>
         {(loadedProducts) => {
+          console.log(loadedProducts);
+
           return (
             <>
               <ul className="flex flex-col gap-[1.5rem] w-full max-w-[16rem]">
@@ -80,7 +91,12 @@ export default function ProductsPage() {
 
                     <form className="flex flex-col gap-[0.5rem]" action="">
                       {loadedProducts?.map((product) => (
-                        <RadioButton key={product.id} label={product.Brand} />
+                        <RadioButton
+                          key={product.id}
+                          id={product.Brand.toLowerCase()}
+                          name={product.category}
+                          label={product.Brand}
+                        />
                       ))}
                     </form>
                   </div>
@@ -95,20 +111,37 @@ export default function ProductsPage() {
                         if (element === "N/A") {
                           return <p key={element}>Not applicable</p>;
                         }
-                        return <RadioButton key={element} label={element} />;
+                        return (
+                          <RadioButton
+                            key={element}
+                            id={element}
+                            name={element}
+                            label={element}
+                          />
+                        );
                       })}
                     </form>
                   </div>
                 </Dropdown>
               </ul>
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-[1.5rem]">
                 <div className="flex justify-between items-center">
-                  <p>
-                    Selected Products: <span>85</span>
+                  <p className="text-[#6C6C6C]">
+                    Selected Products:{" "}
+                    <span className="text-[1.25rem] text-black font-semibold">
+                      85
+                    </span>
                   </p>
 
-                  <Dropdown isDifferent={true} title="By rating">
-                    <p>hu</p>
+                  <Dropdown isRating={true} title="By rating">
+                    <input
+                      className="w-full cursor-pointer"
+                      min="0"
+                      max="5"
+                      step="0.1"
+                      type="range"
+                      onTouchEnd={(e) => handleChange(e.target.value)}
+                    />
                   </Dropdown>
                 </div>
 
