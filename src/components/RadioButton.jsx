@@ -1,5 +1,4 @@
 const RadioButton = ({ label, id, name }) => {
-  console.log(id);
   return (
     <div className="flex items-center gap-[0.5rem]">
       <input

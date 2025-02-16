@@ -53,13 +53,25 @@ export default function ProductsPage() {
     setFinalValue(value);
   }
 
+  function totalItem(products) {
+    const count = products.reduce((accumulator, currentValue) => {
+      accumulator[products.Brand] = (accumulator[currentValue] || 0) + 1;
+
+      return accumulator;
+    }, {});
+
+    return count;
+  }
+
   console.log("final value", finalValue);
 
   return (
     <section className="flex gap-[2rem] px-[10rem] py-[1.5rem]">
       <AsyncLoader promise={products}>
         {(loadedProducts) => {
-          console.log(loadedProducts);
+          const acc = totalItem(loadedProducts);
+
+          console.log(acc);
 
           return (
             <>

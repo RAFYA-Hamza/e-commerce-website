@@ -12,7 +12,7 @@ const Dropdown = ({ title, isRating, children }) => {
 
   if (isRating) {
     return (
-      <div className="flex flex-col relative ">
+      <div className="flex flex-col relative">
         <div
           onClick={handleClick}
           className="flex justify-between gap-[8rem] py-[0.5rem] px-[1rem] border-1 border-[#D4D4D4] rounded-[0.5rem] cursor-pointer"
