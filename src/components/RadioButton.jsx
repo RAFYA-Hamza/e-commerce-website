@@ -1,4 +1,4 @@
-const RadioButton = ({ label, id, name }) => {
+const RadioButton = ({ label, id, name, total }) => {
   return (
     <div className="flex items-center gap-[0.5rem]">
       <input
@@ -9,7 +9,7 @@ const RadioButton = ({ label, id, name }) => {
         value={label}
       />
       <label className="font-semibold" htmlFor={id}>
-        {label} <span className="font-light text-[#A4A4A4]">2</span>
+        {label} <span className="font-light text-[#A4A4A4]">{total}</span>
       </label>
     </div>
   );

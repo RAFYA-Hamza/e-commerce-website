@@ -24,8 +24,6 @@ export default function ProductsPage() {
 
   const [finalValue, setFinalValue] = useState(false);
 
-  const [filtersProducts, setFiltersProducts] = useState();
-
   const { category } = useParams();
   const memory = Object.values(BUILT_IN_MEMEROY[category]);
 
@@ -64,7 +62,7 @@ export default function ProductsPage() {
       category: "Smartphones",
       status: "old",
       Brand: "Samsung",
-      memory: "256GB",
+      memory: "1TB",
       rating: 4.8,
     },
     {
@@ -102,18 +100,24 @@ export default function ProductsPage() {
     },
   ];
 
-  function totalItem(products) {
+  function filtersProducts(products) {
     const count = products.reduce((accumulator, currentValue) => {
       const brand = currentValue.Brand;
       const memory = currentValue.memory;
-      const id = currentValue.id;
 
       if (!accumulator["Brand"] || !accumulator["Memory"]) {
-        accumulator["Brand"] = [];
-        accumulator["Memory"] = [];
+        accumulator["Brand"] = {};
+        accumulator["Memory"] = BUILT_IN_MEMEROY[category].reduce(
+          (acc, obj) => {
+            acc[obj] = 0;
+            return acc;
+          },
+          {}
+        );
       }
 
-      accumulator["Brand"] = (accumulator[brand] || 0) + 1;
+      accumulator["Brand"][brand] = (accumulator["Brand"][brand] || 0) + 1;
+      accumulator["Memory"][memory] = (accumulator["Memory"][memory] || 0) + 1;
 
       return accumulator;
     }, {});
@@ -125,6 +129,10 @@ export default function ProductsPage() {
     <section className="flex gap-[2rem] px-[10rem] py-[1.5rem]">
       <AsyncLoader promise={products}>
         {(loadedProducts) => {
+          const filteredProducts = filtersProducts(loadedProducts);
+          const brands = Object.entries(Object.values(filteredProducts)[0]);
+          // const memory = Object.values(filteredProducts)[1];
+          console.log(brands);
           return (
             <>
               <ul className="flex flex-col gap-[1.5rem] w-full max-w-[16rem]">
@@ -154,12 +162,13 @@ export default function ProductsPage() {
                     <SearchField isMin={true} />
 
                     <form className="flex flex-col gap-[0.5rem]" action="">
-                      {loadedProducts?.map((product) => (
+                      {brands?.map((brand) => (
                         <RadioButton
-                          key={product.id}
-                          id={product.Brand.toLowerCase()}
-                          name={product.category}
-                          label={product.Brand}
+                          key={brand[0]}
+                          id={brand[0]}
+                          name={category}
+                          label={brand[0]}
+                          total={brand[1]}
                         />
                       ))}
                     </form>
