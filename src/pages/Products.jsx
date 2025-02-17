@@ -24,6 +24,8 @@ export default function ProductsPage() {
 
   const [finalValue, setFinalValue] = useState(false);
 
+  const [filtersProducts, setFiltersProducts] = useState();
+
   const { category } = useParams();
   const memory = Object.values(BUILT_IN_MEMEROY[category]);
 
@@ -53,9 +55,65 @@ export default function ProductsPage() {
     setFinalValue(value);
   }
 
+  const arry = [
+    {
+      id: 11,
+      name: "Samsung Galaxy S23 Ultra",
+      price: 1199,
+      image: "images/iphone-14-pro.png",
+      category: "Smartphones",
+      status: "old",
+      Brand: "Samsung",
+      memory: "256GB",
+      rating: 4.8,
+    },
+    {
+      id: 12,
+      name: "Dell XPS 15",
+      price: 1999,
+      image: "images/iphone-14-pro.png",
+      category: "Computers",
+      status: "old",
+      Brand: "Samsung",
+      memory: "1TB",
+      rating: 4.7,
+    },
+    {
+      id: 13,
+      name: "Fitbit Sense 2",
+      price: 299,
+      image: "images/iphone-14-pro.png",
+      category: "Smartwatches",
+      status: "discount",
+      Brand: "Fitbit",
+      memory: "4GB",
+      rating: 4.4,
+    },
+    {
+      id: 14,
+      name: "Sony Alpha 7 IV",
+      price: 2499,
+      image: "images/iphone-14-pro.png",
+      category: "Cameras",
+      status: "featured",
+      Brand: "Sony",
+      memory: "512GB",
+      rating: 4.8,
+    },
+  ];
+
   function totalItem(products) {
     const count = products.reduce((accumulator, currentValue) => {
-      accumulator[products.Brand] = (accumulator[currentValue] || 0) + 1;
+      const brand = currentValue.Brand;
+      const memory = currentValue.memory;
+      const id = currentValue.id;
+
+      if (!accumulator["Brand"] || !accumulator["Memory"]) {
+        accumulator["Brand"] = [];
+        accumulator["Memory"] = [];
+      }
+
+      accumulator["Brand"] = (accumulator[brand] || 0) + 1;
 
       return accumulator;
     }, {});
@@ -63,16 +121,10 @@ export default function ProductsPage() {
     return count;
   }
 
-  console.log("final value", finalValue);
-
   return (
     <section className="flex gap-[2rem] px-[10rem] py-[1.5rem]">
       <AsyncLoader promise={products}>
         {(loadedProducts) => {
-          const acc = totalItem(loadedProducts);
-
-          console.log(acc);
-
           return (
             <>
               <ul className="flex flex-col gap-[1.5rem] w-full max-w-[16rem]">
