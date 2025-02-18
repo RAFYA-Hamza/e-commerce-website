@@ -7,7 +7,7 @@ import Dropdown from "../components/UI/Dropdown";
 
 import SearchField from "../components/UI/SearchField";
 import RadioButton from "../components/RadioButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const BUILT_IN_MEMEROY = {
   Smartphones: ["64GB", "128GB", "256GB", "512GB", "1TB"],
@@ -23,82 +23,24 @@ export default function ProductsPage() {
   const navigate = useNavigate();
 
   const [finalValue, setFinalValue] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   const { category } = useParams();
-  const memory = Object.values(BUILT_IN_MEMEROY[category]);
-
-  // function formatNumber(products) {
-  //   let newProducts = [...products];
-
-  //   for (let i = 0; i < newProducts.length - 1; i++) {
-  //     for (let j = i + 1; j < newProducts.length; j++) {
-  //       if (
-  //         newProducts[i].memory !== "N/A" &&
-  //         newProducts[j].memory !== "N/A"
-  //       ) {
-  //         const memory1 = newProducts[i].memory.slice(0, -2);
-  //         const memory2 = newProducts[j].memory.slice(0, -2);
-
-  //         if (parseInt(memory1) > parseInt(memory2)) {
-  //           [newProducts[i], newProducts[j]] = [newProducts[j], newProducts[i]];
-  //         }
-  //       }
-  //     }
-  //   }
-
-  //   return newProducts;
-  // }
 
   function handleChange(value) {
     setFinalValue(value);
   }
 
-  const arry = [
-    {
-      id: 11,
-      name: "Samsung Galaxy S23 Ultra",
-      price: 1199,
-      image: "images/iphone-14-pro.png",
-      category: "Smartphones",
-      status: "old",
-      Brand: "Samsung",
-      memory: "1TB",
-      rating: 4.8,
-    },
-    {
-      id: 12,
-      name: "Dell XPS 15",
-      price: 1999,
-      image: "images/iphone-14-pro.png",
-      category: "Computers",
-      status: "old",
-      Brand: "Samsung",
-      memory: "1TB",
-      rating: 4.7,
-    },
-    {
-      id: 13,
-      name: "Fitbit Sense 2",
-      price: 299,
-      image: "images/iphone-14-pro.png",
-      category: "Smartwatches",
-      status: "discount",
-      Brand: "Fitbit",
-      memory: "4GB",
-      rating: 4.4,
-    },
-    {
-      id: 14,
-      name: "Sony Alpha 7 IV",
-      price: 2499,
-      image: "images/iphone-14-pro.png",
-      category: "Cameras",
-      status: "featured",
-      Brand: "Sony",
-      memory: "512GB",
-      rating: 4.8,
-    },
-  ];
+  function handleSelectedProducts(products, filterBy, filterValue, total) {
+    console.log(total);
+    const selectedProducts = products.filter(
+      (product) => product[filterBy] === filterValue
+    );
+
+    console.log(typeof total);
+
+    setSelectedProducts(selectedProducts);
+  }
 
   function filtersProducts(products) {
     const count = products.reduce((accumulator, currentValue) => {
@@ -131,8 +73,7 @@ export default function ProductsPage() {
         {(loadedProducts) => {
           const filteredProducts = filtersProducts(loadedProducts);
           const brands = Object.entries(Object.values(filteredProducts)[0]);
-          // const memory = Object.values(filteredProducts)[1];
-          console.log(brands);
+          const memory = Object.entries(Object.values(filteredProducts)[1]);
           return (
             <>
               <ul className="flex flex-col gap-[1.5rem] w-full max-w-[16rem]">
@@ -164,11 +105,20 @@ export default function ProductsPage() {
                     <form className="flex flex-col gap-[0.5rem]" action="">
                       {brands?.map((brand) => (
                         <RadioButton
+                          onSelect={(e) =>
+                            handleSelectedProducts(
+                              loadedProducts,
+                              "Brand",
+                              e.target.value,
+                              brand[1]
+                            )
+                          }
                           key={brand[0]}
                           id={brand[0]}
                           name={category}
                           label={brand[0]}
                           total={brand[1]}
+                          disabled={brand[1] <= 0 && true}
                         />
                       ))}
                     </form>
@@ -180,16 +130,27 @@ export default function ProductsPage() {
                     <SearchField isMin={true} />
 
                     <form className="flex flex-col gap-[0.5rem]" action="">
-                      {memory?.map((element) => {
-                        if (element === "N/A") {
-                          return <p key={element}>Not applicable</p>;
+                      {memory?.map((memo) => {
+                        console.log(memo[1]);
+                        if (memo === "N/A") {
+                          return <p key={memo}>Not applicable</p>;
                         }
                         return (
                           <RadioButton
-                            key={element}
-                            id={element}
-                            name={element}
-                            label={element}
+                            onSelect={(e) =>
+                              handleSelectedProducts(
+                                loadedProducts,
+                                "memory",
+                                e.target.value,
+                                memo[1]
+                              )
+                            }
+                            key={memo[0]}
+                            id={memo[0]}
+                            name={category}
+                            label={memo[0]}
+                            total={memo[1]}
+                            disabled={memo[1] <= 0 && true}
                           />
                         );
                       })}
@@ -202,7 +163,7 @@ export default function ProductsPage() {
                   <p className="text-[#6C6C6C]">
                     Selected Products:{" "}
                     <span className="text-[1.25rem] text-black font-semibold">
-                      85
+                      {loadedProducts.length}
                     </span>
                   </p>
 
@@ -219,7 +180,10 @@ export default function ProductsPage() {
                 </div>
 
                 <ul className="w-full grid grid-cols-3 grid-flow-row gap-[1rem]">
-                  {loadedProducts?.map((product) => (
+                  {(selectedProducts.length <= 0
+                    ? loadedProducts
+                    : selectedProducts
+                  ).map((product) => (
                     <ProductItem
                       key={product.id}
                       name={product.name}

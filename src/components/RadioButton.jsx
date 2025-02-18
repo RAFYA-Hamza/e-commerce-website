@@ -1,7 +1,9 @@
-const RadioButton = ({ label, id, name, total }) => {
+const RadioButton = ({ label, id, name, total, onSelect, disabled }) => {
   return (
     <div className="flex items-center gap-[0.5rem]">
       <input
+        disabled={disabled}
+        onClick={onSelect}
         className="w-[1rem] h-[1rem] border-4 cursor-pointer"
         type="radio"
         name={name}
@@ -9,7 +11,7 @@ const RadioButton = ({ label, id, name, total }) => {
         value={label}
       />
       <label className="font-semibold" htmlFor={id}>
-        {label} <span className="font-light text-[#A4A4A4]">{total}</span>
+        {label} <span className="font-light text-[#929292]">({total})</span>
       </label>
     </div>
   );
