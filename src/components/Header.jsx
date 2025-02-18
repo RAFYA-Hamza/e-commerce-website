@@ -1,31 +1,16 @@
 import logoImg from "../assets/logo.svg";
 
-import phoneImg from "../assets/phone.svg";
-import comupterImg from "../assets/computer.svg";
-import swatchImg from "../assets/swatch.svg";
-import cameraImg from "../assets/camera.svg";
-import headphoneImg from "../assets/headphone.svg";
-import gamingImg from "../assets/gaming.svg";
-
 import IconButton from "./UI/IconButton";
 import SearchField from "./UI/SearchField";
 
+import categoryItems from "../utils/categoryItems";
+import { useNavigate } from "react-router-dom";
+
 // const navItem = ["Home", "About", "Contact Us", "Blog"];
 
-const subNavItems = [
-  { url: phoneImg, description: "Phones image", label: "Phones" },
-  { url: comupterImg, description: "Computers image", label: "Computers" },
-  {
-    url: swatchImg,
-    description: "Smart Watches image",
-    label: "Smart Watches",
-  },
-  { url: cameraImg, description: "Cameras image", label: "Cameras" },
-  { url: headphoneImg, description: "Headphones image", label: "Headphones" },
-  { url: gamingImg, description: "Gaming image", label: "Gaming" },
-];
-
 export default function Header() {
+  const navigate = useNavigate();
+
   function handleClick() {
     console.log("clicked");
   }
@@ -143,8 +128,9 @@ export default function Header() {
         </div>
       </header>
       <nav className="w-full px-[10rem] py-[0.5rem] flex justify-between bg-[#2E2E2E] text-[#797979]">
-        {subNavItems.map((item, index) => (
+        {categoryItems.map((item, index) => (
           <IconButton
+            onSelect={() => navigate(`/products/${item.category}`)}
             key={index}
             isText={true}
             url={item.url}

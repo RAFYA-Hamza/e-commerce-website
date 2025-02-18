@@ -32,12 +32,9 @@ export default function ProductsPage() {
   }
 
   function handleSelectedProducts(products, filterBy, filterValue, total) {
-    console.log(total);
     const selectedProducts = products.filter(
       (product) => product[filterBy] === filterValue
     );
-
-    console.log(typeof total);
 
     setSelectedProducts(selectedProducts);
   }
@@ -131,7 +128,6 @@ export default function ProductsPage() {
 
                     <form className="flex flex-col gap-[0.5rem]" action="">
                       {memory?.map((memo) => {
-                        console.log(memo[1]);
                         if (memo === "N/A") {
                           return <p key={memo}>Not applicable</p>;
                         }
@@ -163,7 +159,12 @@ export default function ProductsPage() {
                   <p className="text-[#6C6C6C]">
                     Selected Products:{" "}
                     <span className="text-[1.25rem] text-black font-semibold">
-                      {loadedProducts.length}
+                      {
+                        (selectedProducts.length <= 0
+                          ? loadedProducts
+                          : selectedProducts
+                        ).length
+                      }
                     </span>
                   </p>
 
