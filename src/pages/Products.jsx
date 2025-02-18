@@ -7,7 +7,7 @@ import Dropdown from "../components/UI/Dropdown";
 
 import SearchField from "../components/UI/SearchField";
 import RadioButton from "../components/RadioButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const BUILT_IN_MEMEROY = {
   Smartphones: ["64GB", "128GB", "256GB", "512GB", "1TB"],
@@ -19,19 +19,27 @@ const BUILT_IN_MEMEROY = {
 };
 
 export default function ProductsPage() {
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [finalValue, setFinalValue] = useState();
+  const [changeValue, setChangeValue] = useState(2.5);
   const { products } = useLoaderData();
   const navigate = useNavigate();
-
-  const [finalValue, setFinalValue] = useState(false);
-  const [selectedProducts, setSelectedProducts] = useState([]);
-
   const { category } = useParams();
 
   function handleChange(value) {
-    setFinalValue(value);
+    setChangeValue(value);
   }
 
-  function handleSelectedProducts(products, filterBy, filterValue, total) {
+  function handleFinalValue(products, value) {
+    console.log(typeof value);
+    const selectedProducts = products.filter(
+      (product) => product.rating === value
+    );
+
+    console.log(selectedProducts);
+  }
+
+  function handleSelectedProducts(products, filterBy, filterValue) {
     const selectedProducts = products.filter(
       (product) => product[filterBy] === filterValue
     );
@@ -106,8 +114,7 @@ export default function ProductsPage() {
                             handleSelectedProducts(
                               loadedProducts,
                               "Brand",
-                              e.target.value,
-                              brand[1]
+                              e.target.value
                             )
                           }
                           key={brand[0]}
@@ -137,8 +144,7 @@ export default function ProductsPage() {
                               handleSelectedProducts(
                                 loadedProducts,
                                 "memory",
-                                e.target.value,
-                                memo[1]
+                                e.target.value
                               )
                             }
                             key={memo[0]}
@@ -170,13 +176,20 @@ export default function ProductsPage() {
 
                   <Dropdown isRating={true} title="By rating">
                     <input
-                      className="w-full cursor-pointer"
+                      className="w-[85%] cursor-pointer"
                       min="0"
                       max="5"
                       step="0.1"
                       type="range"
-                      onTouchEnd={(e) => handleChange(e.target.value)}
+                      onTouchEnd={(e) =>
+                        handleFinalValue(
+                          loadedProducts,
+                          parseInt(e.target.value)
+                        )
+                      }
+                      onChange={(e) => handleChange(e.target.value)}
                     />
+                    <p className="text-black font-semibold">{changeValue}</p>
                   </Dropdown>
                 </div>
 

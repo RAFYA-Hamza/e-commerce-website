@@ -22,7 +22,7 @@ const Dropdown = ({ title, isRating, children }) => {
         </div>
 
         <div
-          className={`w-full absolute top-[100%] py-[0.25rem] ${
+          className={`flex justify-between w-full absolute top-[100%] py-[0.1rem] ${
             !isOpen && "hidden"
           }`}
         >
