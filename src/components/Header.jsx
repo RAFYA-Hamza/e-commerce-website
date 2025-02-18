@@ -130,7 +130,10 @@ export default function Header() {
       <nav className="w-full px-[10rem] py-[0.5rem] flex justify-between bg-[#2E2E2E] text-[#797979]">
         {categoryItems.map((item, index) => (
           <IconButton
-            onSelect={() => navigate(`/products/${item.category}`)}
+            onSelect={() => {
+              navigate(`/products/${item.category}`);
+              window.scrollTo(0, 0);
+            }}
             key={index}
             isText={true}
             url={item.url}

@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import BreadcrumbArrow from "../components/UI/BreadcrumbArrow";
-import React from "react";
+import React, { useEffect } from "react";
 
 const ProductsLayout = () => {
   const params = useParams();
@@ -21,6 +21,10 @@ const ProductsLayout = () => {
   if (queryEntries.length <= 0) {
     queryEntries.push(["Category", params.category]);
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
