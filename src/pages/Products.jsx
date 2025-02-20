@@ -62,6 +62,7 @@ export default function ProductsPage() {
       }
 
       accumulator["Brand"][brand] = (accumulator["Brand"][brand] || 0) + 1;
+
       accumulator["Memory"][memory] = (accumulator["Memory"][memory] || 0) + 1;
 
       return accumulator;
@@ -133,7 +134,7 @@ export default function ProductsPage() {
 
                     <form className="flex flex-col gap-[0.5rem]" action="">
                       {memory?.map((memo) => {
-                        if (memo === "N/A") {
+                        if (memo[0] === "N/A") {
                           return <p key={memo}>Not applicable</p>;
                         }
                         return (

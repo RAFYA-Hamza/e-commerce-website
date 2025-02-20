@@ -1,30 +1,55 @@
 import { useLoaderData } from "react-router-dom";
 import { sendHttpRequest } from "../hooks/useHttp";
 import AsyncLoader from "../components/AsyncLoader";
-import ProductItem from "../components/UI/ProductItem";
+import Tabs from "../components/UI/Tabs";
+
+import Details from "../components/Details";
 
 const ProductDetails = () => {
   const { product } = useLoaderData();
 
   return (
-    <>
-      <h1>Products details</h1>
-      <ul className="grid grid-cols-6 grid-flow-row gap-[1rem]">
-        <AsyncLoader promise={product}>
-          {(loadedProduct) => {
-            console.log(loadedProduct);
-            return (
-              <ProductItem
-                key={loadedProduct.id}
-                name={loadedProduct.name}
-                price={loadedProduct.price}
-                urlImage={`http://localhost:8080/${loadedProduct.image}`}
-              />
-            );
-          }}
-        </AsyncLoader>
-      </ul>
-    </>
+    <AsyncLoader promise={product}>
+      {(loadedProduct) => {
+        console.log(loadedProduct);
+        return (
+          <section className=" flex flex-col">
+            <div className="px-[10rem] py-[7rem] flex items-center gap-[3rem]">
+              <div className="">
+                <img
+                  src={`http://localhost:8080/${loadedProduct.image}`}
+                  alt="The images"
+                />
+              </div>
+              <div className="flex flex-col gap-[2rem]">
+                <div className="flex flex-col gap-[1rem]">
+                  <div className="flex flex-col gap-[1.5rem]">
+                    <h1>Apple iPhone 14 Pro Max</h1>
+                    <p>$1399</p>
+                  </div>
+
+                  <form className="flex flex-col gap-[1.5rem]">
+                    <div className="flex">
+                      <p>Select color:</p>
+                      <input type="radio" />
+                    </div>
+
+                    <div className="flex gap-[1rem]">
+                      <Tabs />
+                      <Tabs />
+                      <Tabs />
+                    </div>
+                    <div className="w-full grid grid-cols-3 grid-flow-row gap-[1rem]">
+                      <Details />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }}
+    </AsyncLoader>
   );
 };
 
