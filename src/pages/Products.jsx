@@ -20,7 +20,6 @@ const BUILT_IN_MEMEROY = {
 
 export default function ProductsPage() {
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [finalValue, setFinalValue] = useState();
   const [changeValue, setChangeValue] = useState(2.5);
   const { products } = useLoaderData();
   const navigate = useNavigate();
@@ -31,12 +30,11 @@ export default function ProductsPage() {
   }
 
   function handleFinalValue(products, value) {
-    console.log(typeof value);
     const selectedProducts = products.filter(
       (product) => product.rating === value
     );
 
-    console.log(selectedProducts);
+    setSelectedProducts(selectedProducts);
   }
 
   function handleSelectedProducts(products, filterBy, filterValue) {
@@ -181,10 +179,16 @@ export default function ProductsPage() {
                       max="5"
                       step="0.1"
                       type="range"
+                      onMouseUp={(e) =>
+                        handleFinalValue(
+                          loadedProducts,
+                          parseFloat(e.target.value)
+                        )
+                      }
                       onTouchEnd={(e) =>
                         handleFinalValue(
                           loadedProducts,
-                          parseInt(e.target.value)
+                          parseFloat(e.target.value)
                         )
                       }
                       onChange={(e) => handleChange(e.target.value)}
