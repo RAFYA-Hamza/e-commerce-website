@@ -9,7 +9,7 @@ export default function Button({ children, isIcon, type, onSelect }) {
     cssClass = "bg-black text-white";
   }
 
-  const classButton = `py-[1rem] px-[4rem] flex gap-[1rem] rounded-[0.5rem] cursor-pointer ${cssClass}`;
+  const classButton = `py-[1rem] px-[4rem] flex gap-[1rem] justify-center items-center flex-1 rounded-[0.5rem] cursor-pointer ${cssClass}`;
 
   return (
     <button onClick={onSelect} className={classButton}>

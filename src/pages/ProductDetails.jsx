@@ -4,12 +4,15 @@ import AsyncLoader from "../components/AsyncLoader";
 import Tabs from "../components/UI/Tabs";
 
 import Details from "../components/Details";
+import Button from "../components/UI/Button";
+
+import Feature from "../components/Feature";
 
 const ProductDetails = () => {
   const { product } = useLoaderData();
 
-  function handleClick() {
-    console.log("clicked");
+  function handleClick(value) {
+    console.log(value);
   }
 
   return (
@@ -35,19 +38,14 @@ const ProductDetails = () => {
                     <p className="text-[2rem] font-medium">$1399</p>
                   </div>
 
-                  <form className="flex flex-col gap-[1.5rem]">
-                    <div className="flex">
+                  <div className="flex flex-col gap-[1.5rem]">
+                    <div className="flex gap-[1rem] items-center">
                       <p className="text-[#0C0C0C]">Select color:</p>
-                      <div className="relative h-[2rem] w-[2rem]">
-                        <input
-                          onClick={(e) => handleClick(e.target.value)}
-                          className="w-full h-full z-2"
-                          type="radio"
-                        />
-                        <label
-                          className="w-full h-full absolute left-[0%] rounded-[100%] bg-transparent"
-                          htmlFor=""
-                        ></label>
+
+                      <div className="flex gap-[1rem]">
+                        <button className="h-[2rem] w-[2rem] rounded-[100%] bg-black"></button>
+                        <button className="h-[2rem] w-[2rem] rounded-[100%] bg-red-500"></button>
+                        <button className="h-[2rem] w-[2rem] rounded-[100%] bg-sky-400"></button>
                       </div>
                     </div>
 
@@ -64,7 +62,18 @@ const ProductDetails = () => {
                       <Details />
                       <Details />
                     </div>
-                  </form>
+
+                    <div className="flex gap-[2rem]">
+                      <Button type="blackStroke">Add to Wishlist</Button>
+                      <Button>Add to Cart</Button>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <Feature />
+                      <Feature />
+                      <Feature />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
