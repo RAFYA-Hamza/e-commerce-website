@@ -14,43 +14,64 @@ import logoCpu from "../assets/icons/cpu.svg";
 import logoCore from "../assets/icons/core.svg";
 import logoMainCamera from "../assets/icons/mainCamera.svg";
 import logoSelfieCamera from "../assets/icons/selfieCamera.svg";
+import logoWarranty from "../assets/icons/warranty.svg";
+import logoStore from "../assets/icons/store.svg";
+import logoDelivery from "../assets/icons/delivery.svg";
 
 const DETAILS = [
   {
     image: logoPhone,
     description: "Logo Phone",
     label: "Screen size",
-    value: '6.7""',
+    value: "screen_size",
   },
   {
     image: logoCpu,
     description: "Logo Cpu",
     label: "CPU",
-    value: '6.7""',
+    value: "CPU",
   },
   {
     image: logoCore,
     description: "Logo Core",
     label: "Number of cores",
-    value: '6.7""',
+    value: "Numbers_of_cores",
   },
   {
     image: logoMainCamera,
     description: "Logo Main camera",
     label: "Main camera",
-    value: '6.7""',
+    value: "main_camera",
   },
   {
     image: logoSelfieCamera,
     description: "Logo Selfie Camera",
     label: "Front camera",
-    value: '6.7""',
+    value: "front_camera",
   },
   {
     image: logoBattery,
     description: "Logo Battery",
     label: "Battery Capacity",
-    value: `6.7""`,
+    value: "battery_capacity",
+  },
+];
+
+const FEATURES = [
+  {
+    image: logoDelivery,
+    label: "Free delivery",
+    value: "1-2 day",
+  },
+  {
+    image: logoStore,
+    label: "In stock",
+    value: "Today",
+  },
+  {
+    image: logoWarranty,
+    label: "Guaranteed",
+    value: "1 year",
   },
 ];
 
@@ -122,19 +143,13 @@ const ProductDetails = () => {
                       <Tabs />
                     </div>
                     <div className="w-full grid grid-cols-3 grid-flow-row gap-[1rem]">
-                      <Details
-                        imageUrl={logoPhone}
-                        altDescription="Logo phone"
-                        label="Screen size"
-                        value={loadedProduct.screen_size}
-                      />
-                      {DETAILS.map((detail) => (
+                      {DETAILS.map((detail, index) => (
                         <Details
-                          key={detail.label}
-                          imageUrl={logoPhone}
-                          altDescription="Logo phone"
-                          label="Screen size"
-                          value={loadedProduct.screen_size}
+                          key={index}
+                          imageUrl={detail.image}
+                          altDescription={detail.description}
+                          label={detail.label}
+                          value={loadedProduct[`${detail.value}`]}
                         />
                       ))}
                     </div>
@@ -145,9 +160,14 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="flex justify-between">
-                      <Feature />
-                      <Feature />
-                      <Feature />
+                      {FEATURES.map((feature, index) => (
+                        <Feature
+                          key={index}
+                          imageUrl={feature.image}
+                          label={feature.label}
+                          value={feature.value}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
