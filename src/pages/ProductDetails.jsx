@@ -1,12 +1,58 @@
 import { useLoaderData } from "react-router-dom";
 import { sendHttpRequest } from "../hooks/useHttp";
 import AsyncLoader from "../components/AsyncLoader";
-import Tabs from "../components/UI/Tabs";
 
-import Details from "../components/Details";
+import Tabs from "../components/UI/Tabs";
 import Button from "../components/UI/Button";
 
+import Details from "../components/Details";
 import Feature from "../components/Feature";
+
+import logoPhone from "../assets/icons/sizeScreen.svg";
+import logoBattery from "../assets/icons/battery.svg";
+import logoCpu from "../assets/icons/cpu.svg";
+import logoCore from "../assets/icons/core.svg";
+import logoMainCamera from "../assets/icons/mainCamera.svg";
+import logoSelfieCamera from "../assets/icons/selfieCamera.svg";
+
+const DETAILS = [
+  {
+    image: logoPhone,
+    description: "Logo Phone",
+    label: "Screen size",
+    value: '6.7""',
+  },
+  {
+    image: logoCpu,
+    description: "Logo Cpu",
+    label: "CPU",
+    value: '6.7""',
+  },
+  {
+    image: logoCore,
+    description: "Logo Core",
+    label: "Number of cores",
+    value: '6.7""',
+  },
+  {
+    image: logoMainCamera,
+    description: "Logo Main camera",
+    label: "Main camera",
+    value: '6.7""',
+  },
+  {
+    image: logoSelfieCamera,
+    description: "Logo Selfie Camera",
+    label: "Front camera",
+    value: '6.7""',
+  },
+  {
+    image: logoBattery,
+    description: "Logo Battery",
+    label: "Battery Capacity",
+    value: `6.7""`,
+  },
+];
 
 const ProductDetails = () => {
   const { product } = useLoaderData();
@@ -22,8 +68,27 @@ const ProductDetails = () => {
         return (
           <section className=" flex flex-col">
             <div className="px-[10rem] py-[7rem] flex items-center gap-[3rem]">
-              <div className="flex-1">
+              <div className="flex gap-[1rem] flex-1">
+                <div className="max-w-[5rem] flex flex-col gap-[1.5rem] justify-center">
+                  <img
+                    src={`http://localhost:8080/${loadedProduct.image}`}
+                    alt="The images"
+                  />
+                  <img
+                    src={`http://localhost:8080/${loadedProduct.image}`}
+                    alt="The images"
+                  />
+                  <img
+                    src={`http://localhost:8080/${loadedProduct.image}`}
+                    alt="The images"
+                  />
+                  <img
+                    src={`http://localhost:8080/${loadedProduct.image}`}
+                    alt="The images"
+                  />
+                </div>
                 <img
+                  className="flex-1"
                   src={`http://localhost:8080/${loadedProduct.image}`}
                   alt="The images"
                 />
@@ -33,9 +98,11 @@ const ProductDetails = () => {
                 <div className="flex flex-col gap-[1rem]">
                   <div className="flex flex-col gap-[1.5rem]">
                     <h1 className="text-[2.5rem] leading-none font-bold">
-                      Apple iPhone 14 Pro Max
+                      {loadedProduct.name}
                     </h1>
-                    <p className="text-[2rem] font-medium">$1399</p>
+                    <p className="text-[2rem] font-medium">
+                      ${loadedProduct.price}
+                    </p>
                   </div>
 
                   <div className="flex flex-col gap-[1.5rem]">
@@ -55,12 +122,21 @@ const ProductDetails = () => {
                       <Tabs />
                     </div>
                     <div className="w-full grid grid-cols-3 grid-flow-row gap-[1rem]">
-                      <Details />
-                      <Details />
-                      <Details />
-                      <Details />
-                      <Details />
-                      <Details />
+                      <Details
+                        imageUrl={logoPhone}
+                        altDescription="Logo phone"
+                        label="Screen size"
+                        value={loadedProduct.screen_size}
+                      />
+                      {DETAILS.map((detail) => (
+                        <Details
+                          key={detail.label}
+                          imageUrl={logoPhone}
+                          altDescription="Logo phone"
+                          label="Screen size"
+                          value={loadedProduct.screen_size}
+                        />
+                      ))}
                     </div>
 
                     <div className="flex gap-[2rem]">
@@ -77,6 +153,8 @@ const ProductDetails = () => {
                 </div>
               </div>
             </div>
+
+            <div></div>
           </section>
         );
       }}
