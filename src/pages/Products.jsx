@@ -25,6 +25,12 @@ export default function ProductsPage() {
   const navigate = useNavigate();
   const { category } = useParams();
 
+  const [step, setStep] = useState(1);
+
+  let steps;
+  let min;
+  let max;
+
   function handleChange(value) {
     setChangeValue(value);
   }
@@ -78,6 +84,16 @@ export default function ProductsPage() {
           const filteredProducts = filtersProducts(loadedProducts);
           const brands = Object.entries(Object.values(filteredProducts)[0]);
           const memory = Object.entries(Object.values(filteredProducts)[1]);
+          const range = loadedProducts
+            .map((product) => product.rating)
+            .sort((a, b) => a - b);
+
+          steps = range.length;
+          min = 0;
+          max = range[steps - 1];
+
+          console.log(range);
+          console.log(max);
           return (
             <>
               <ul className="flex flex-col gap-[1.5rem] w-full max-w-[16rem]">
@@ -176,10 +192,11 @@ export default function ProductsPage() {
                   <Dropdown isRating={true} title="By rating">
                     <input
                       className="w-[85%] cursor-pointer"
-                      min="0"
-                      max="5"
+                      min={min}
+                      max={max}
                       step="0.1"
                       type="range"
+                      value={min}
                       onMouseUp={(e) =>
                         handleFinalValue(
                           loadedProducts,
@@ -194,6 +211,7 @@ export default function ProductsPage() {
                       }
                       onChange={(e) => handleChange(e.target.value)}
                     />
+
                     <p className="text-black font-semibold">{changeValue}</p>
                   </Dropdown>
                 </div>

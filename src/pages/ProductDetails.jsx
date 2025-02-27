@@ -85,7 +85,6 @@ const ProductDetails = () => {
   return (
     <AsyncLoader promise={product}>
       {(loadedProduct) => {
-        console.log(loadedProduct);
         return (
           <section className=" flex flex-col">
             <div className="px-[10rem] py-[7rem] flex items-center gap-[3rem]">
@@ -143,15 +142,21 @@ const ProductDetails = () => {
                       <Tabs />
                     </div>
                     <div className="w-full grid grid-cols-3 grid-flow-row gap-[1rem]">
-                      {DETAILS.map((detail, index) => (
-                        <Details
-                          key={index}
-                          imageUrl={detail.image}
-                          altDescription={detail.description}
-                          label={detail.label}
-                          value={loadedProduct[`${detail.value}`]}
-                        />
-                      ))}
+                      {DETAILS.map((detail, index) => {
+                        if (loadedProduct[`${detail.value}`] === "N/A") {
+                          return;
+                        }
+
+                        return (
+                          <Details
+                            key={index}
+                            imageUrl={detail.image}
+                            altDescription={detail.description}
+                            label={detail.label}
+                            value={loadedProduct[`${detail.value}`]}
+                          />
+                        );
+                      })}
                     </div>
 
                     <div className="flex gap-[2rem]">
