@@ -31,7 +31,6 @@ export default function ProductsPage() {
   let max;
 
   function handleChange(value) {
-    console.log(value);
     setStep(value);
   }
 
@@ -92,8 +91,6 @@ export default function ProductsPage() {
           min = 0;
           max = steps - 1;
 
-          console.log(min);
-          console.log(max);
           return (
             <>
               <ul className="flex flex-col gap-[1.5rem] w-full max-w-[16rem]">
@@ -197,16 +194,10 @@ export default function ProductsPage() {
                       value={step}
                       type="range"
                       onMouseUp={(e) =>
-                        handleFinalValue(
-                          loadedProducts,
-                          parseFloat(e.target.value)
-                        )
+                        handleFinalValue(loadedProducts, range[e.target.value])
                       }
                       onTouchEnd={(e) =>
-                        handleFinalValue(
-                          loadedProducts,
-                          parseFloat(e.target.value)
-                        )
+                        handleFinalValue(loadedProducts, range[e.target.value])
                       }
                       onChange={(e) => handleChange(e.target.value)}
                     />
