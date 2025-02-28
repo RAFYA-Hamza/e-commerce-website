@@ -20,7 +20,6 @@ const BUILT_IN_MEMEROY = {
 
 export default function ProductsPage() {
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [changeValue, setChangeValue] = useState(2.5);
   const { products } = useLoaderData();
   const navigate = useNavigate();
   const { category } = useParams();
@@ -32,7 +31,8 @@ export default function ProductsPage() {
   let max;
 
   function handleChange(value) {
-    setChangeValue(value);
+    console.log(value);
+    setStep(value);
   }
 
   function handleFinalValue(products, value) {
@@ -90,9 +90,9 @@ export default function ProductsPage() {
 
           steps = range.length;
           min = 0;
-          max = range[steps - 1];
+          max = steps - 1;
 
-          console.log(range);
+          console.log(min);
           console.log(max);
           return (
             <>
@@ -194,9 +194,8 @@ export default function ProductsPage() {
                       className="w-[85%] cursor-pointer"
                       min={min}
                       max={max}
-                      step="0.1"
+                      value={step}
                       type="range"
-                      value={min}
                       onMouseUp={(e) =>
                         handleFinalValue(
                           loadedProducts,
@@ -212,7 +211,7 @@ export default function ProductsPage() {
                       onChange={(e) => handleChange(e.target.value)}
                     />
 
-                    <p className="text-black font-semibold">{changeValue}</p>
+                    <p className="text-black font-semibold">{range[step]}</p>
                   </Dropdown>
                 </div>
 
