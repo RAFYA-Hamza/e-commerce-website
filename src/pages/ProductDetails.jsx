@@ -1,12 +1,13 @@
 import { useLoaderData } from "react-router-dom";
+import { useEffect } from "react";
+
 import { sendHttpRequest } from "../hooks/useHttp";
-import AsyncLoader from "../components/AsyncLoader";
 
 import Tabs from "../components/UI/Tabs";
 import Button from "../components/UI/Button";
-
 import Details from "../components/Details";
 import Feature from "../components/Feature";
+import AsyncLoader from "../components/AsyncLoader";
 
 import logoPhone from "../assets/icons/sizeScreen.svg";
 import logoBattery from "../assets/icons/battery.svg";
@@ -78,9 +79,9 @@ const FEATURES = [
 const ProductDetails = () => {
   const { product } = useLoaderData();
 
-  function handleClick(value) {
-    console.log(value);
-  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <AsyncLoader promise={product}>

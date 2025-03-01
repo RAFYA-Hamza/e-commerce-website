@@ -85,7 +85,13 @@ export default function ProductsPage() {
           const memory = Object.entries(Object.values(filteredProducts)[1]);
           const range = loadedProducts
             .map((product) => product.rating)
-            .sort((a, b) => a - b);
+            .sort((a, b) => a - b)
+            .reduce((acc, value) => {
+              if (!acc.includes(value)) {
+                acc.push(value);
+              }
+              return acc;
+            }, []);
 
           steps = range.length;
           min = 0;
