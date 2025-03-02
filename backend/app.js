@@ -64,6 +64,14 @@ app.get("/", async (req, res) => {
   }, 2000);
 });
 
+app.get("/products-details", async (req, res) => {
+  const products = await fs.readFile("./data/products-details.json", "utf8");
+
+  const productsObj = JSON.parse(products);
+
+  res.json(productsObj);
+});
+
 app.listen(8080);
 
 console.log("start listening...");

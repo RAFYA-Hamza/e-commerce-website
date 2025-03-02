@@ -86,6 +86,7 @@ const ProductDetails = () => {
   return (
     <AsyncLoader promise={product}>
       {(loadedProduct) => {
+        console.log(loadedProduct);
         return (
           <section className=" flex flex-col">
             <div className="px-[10rem] py-[7rem] flex items-center gap-[3rem]">
