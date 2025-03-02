@@ -76,6 +76,33 @@ const FEATURES = [
   },
 ];
 
+const colorMap = {
+  "Space Black": "#0A0A0A",
+  Silver: "#C0C0C0",
+  Gold: "#FFD700",
+  "Space Gray": "#808080",
+  Black: "#000000",
+  "Pink Gold": "#E0BFB8",
+  White: "#FFFFFF",
+  Obsidian: "#464646",
+  Snow: "#FFFAFA",
+  Hazel: "#8E7618",
+  Platinum: "#E5E4E2",
+  Sage: "#B2AC88",
+  Sandstone: "#C2B280",
+  Titanium: "#878681",
+  "Phantom Black": "#000000",
+  Green: "#00FF00",
+  Lavender: "#E6E6FA",
+  "Platinum Silver": "#C0C0C0",
+  "Frost White": "#F5F5F5",
+  Graphite: "#383838",
+  "Titan Black": "#000000",
+  "Emerald Green": "#50C878",
+  "Nightfall Black": "#000000",
+  "Poseidon Blue": "#1E3A8A",
+};
+
 const ProductDetails = () => {
   const { product } = useLoaderData();
 
@@ -132,9 +159,15 @@ const ProductDetails = () => {
                       <p className="text-[#0C0C0C]">Select color:</p>
 
                       <div className="flex gap-[1rem]">
-                        <button className="h-[2rem] w-[2rem] rounded-[100%] bg-black"></button>
-                        <button className="h-[2rem] w-[2rem] rounded-[100%] bg-red-500"></button>
-                        <button className="h-[2rem] w-[2rem] rounded-[100%] bg-sky-400"></button>
+                        {loadedProduct.colors.map((color, index) => {
+                          const cssClass = `bg-[${colorMap[color]}]`;
+                          return (
+                            <button
+                              key={index}
+                              className={`h-[2rem] w-[2rem] rounded-[100%] ${cssClass}`}
+                            ></button>
+                          );
+                        })}
                       </div>
                     </div>
 
