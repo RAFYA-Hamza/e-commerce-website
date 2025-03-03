@@ -1,22 +1,14 @@
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 import { sendHttpRequest } from "../hooks/useHttp";
 
 import AsyncLoader from "../components/AsyncLoader";
 import ProductItem from "../components/UI/ProductItem";
 import Dropdown from "../components/UI/Dropdown";
-
 import SearchField from "../components/UI/SearchField";
 import RadioButton from "../components/RadioButton";
-import { useState } from "react";
 
-const BUILT_IN_MEMEROY = {
-  Smartphones: ["64GB", "128GB", "256GB", "512GB", "1TB"],
-  Computers: ["256GB", "512GB", "1TB", "2TB"],
-  Smartwatches: ["4GB", "8GB", "16GB", "32GB"],
-  Cameras: ["N/A"],
-  Headphones: ["N/A"],
-  Gaming: ["64GB", "128GB", "256GB", "512GB", "1TB", "2TB"],
-};
+import BUILT_IN_MEMEROY from "../utils/builtInMemory";
 
 export default function ProductsPage() {
   const [selectedProducts, setSelectedProducts] = useState([]);

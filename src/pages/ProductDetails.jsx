@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 import { sendHttpRequest } from "../hooks/useHttp";
@@ -8,6 +8,7 @@ import Button from "../components/UI/Button";
 import Details from "../components/Details";
 import Feature from "../components/Feature";
 import AsyncLoader from "../components/AsyncLoader";
+import BUILT_IN_MEMEROY from "../utils/builtInMemory";
 
 import logoPhone from "../assets/icons/sizeScreen.svg";
 import logoBattery from "../assets/icons/battery.svg";
@@ -105,6 +106,7 @@ const colorMap = {
 
 const ProductDetails = () => {
   const { product } = useLoaderData();
+  const { category } = useParams();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -160,11 +162,11 @@ const ProductDetails = () => {
 
                       <div className="flex gap-[1rem]">
                         {loadedProduct.colors.map((color, index) => {
-                          const cssClass = `bg-[${colorMap[color]}]`;
                           return (
                             <button
                               key={index}
-                              className={`h-[2rem] w-[2rem] rounded-[100%] ${cssClass}`}
+                              style={{ backgroundColor: colorMap[color] }}
+                              className="h-[2rem] w-[2rem] border-2 border-blue-500 rounded-full cursor-pointer"
                             ></button>
                           );
                         })}
@@ -172,9 +174,17 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="flex gap-[1rem]">
-                      <Tabs />
-                      <Tabs />
-                      <Tabs />
+                      {BUILT_IN_MEMEROY[category].map((memory, index) => (
+                        <Tabs
+                          status={
+                            loadedProduct.memory === memory
+                              ? "selected"
+                              : "noActive"
+                          }
+                          key={index}
+                          label={memory}
+                        />
+                      ))}
                     </div>
                     <div className="w-full grid grid-cols-3 grid-flow-row gap-[1rem]">
                       {DETAILS.map((detail, index) => {
