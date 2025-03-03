@@ -1,5 +1,5 @@
 const Tabs = ({ label, status }) => {
-  let cssClass = "border-black text-black";
+  let cssClass = "border-black text-black cursor-pointer";
 
   if (status === "noActive") {
     cssClass = "border-[#D5D5D5] text-[#D5D5D5]";
@@ -9,9 +9,15 @@ const Tabs = ({ label, status }) => {
     cssClass = "border-[#D5D5D5] text-[#6F6F6F]";
   }
 
+  function handleClick() {
+    console.log("clicked");
+  }
+
   return (
     <button
-      className={`max-[6rem]: py-[1rem] px-[1.5rem] rounded-[1rem] cursor-pointer border-1 ${cssClass}`}
+      disabled={status === "noActive" && true}
+      onClick={handleClick}
+      className={`max-[6rem]: py-[1rem] px-[1.5rem] rounded-[1rem] border-1 ${cssClass}`}
     >
       {label}
     </button>
